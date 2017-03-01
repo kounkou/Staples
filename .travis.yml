@@ -1,0 +1,39 @@
+language: cpp
+sudo    : required
+dist    : Trusty
+group   : stable
+compiler: gcc
+os      : linux
+
+before_install:
+- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+- sudo apt-get update -qq
+
+install:
+- sudo apt-get install libgtest-dev
+- sudo apt-get install -qq g++-5
+- sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+
+script:
+- export WORKDIR=$PWD
+- echo $PWD
+- cd /usr/src/gtest
+- ls -al
+- sudo cmake CMakeLists.txt
+- sudo make
+- sudo cp *.a /usr/lib
+- cd ${WORKDIR}
+- chmod +x ./scripts/dependencies.sh ./scripts/build.sh ./scripts/qt-5.7 ./scripts/extract-qt-installer ./scripts/get_code_cov.sh 
+- ./scripts/dependencies.sh
+- source ./scripts/qt-5.7.env
+- ./scripts/build.sh
+- ./scripts/get_code_cov.sh
+
+after_success: 
+- bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false
+env:
+  global:
+  - LANG="en_US.UTF-8"
