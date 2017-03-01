@@ -2,7 +2,7 @@ QT +=
 
 CONFIG += c++11
 
-SOURCES += Staples_Test.cpp \
+SOURCES += Staple_Test.cpp \
            main.cpp
 
 INCLUDEPATH += ../inc/ \
@@ -19,4 +19,4 @@ QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# HEADERS += ../inc/Staples.h
+# HEADERS += ../inc/Staple.h
