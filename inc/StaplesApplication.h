@@ -23,6 +23,7 @@ public:
    virtual ~StaplesApplication();
 
    int init();
+   int retrieveServerApplicationIPAddress(const QUrl &url);
 
 /// protected members
 private:
