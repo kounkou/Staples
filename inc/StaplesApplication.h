@@ -12,6 +12,7 @@
 #define _STAPLES_APPLICATION_H_
 
 #include <string>
+#include "StaplesNetworkFactory.h"
 
 class StaplesApplication
 {
@@ -21,8 +22,12 @@ public:
    StaplesApplication();
    virtual ~StaplesApplication();
 
+   int init();
+
 /// protected members
 private:
+   QNetworkAccessManager* _networkObj;
+   StaplesNetworkFactory _networkObjFactory;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_

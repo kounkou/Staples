@@ -1,9 +1,11 @@
-QT +=
+QT += network
 
 CONFIG += c++11
 
-SOURCES += Staple_Test.cpp \
-           main.cpp
+SOURCES += main.cpp                       \
+           Staple_Test.cpp                \
+           StaplesApplication_Test.cpp    \
+           StaplesNetworkFactory_Test.cpp
 
 INCLUDEPATH += ../inc/ \
                ../src/

@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
         QQmlApplicationEngine engine;
 
         StaplesApplication stapleApplication;
+        stapleApplication.init();
 
         qDebug() << "offlineStoragPath orig: " << engine.offlineStoragePath();
         engine.load(QUrl(QLatin1String("qrc:/main.qml")));

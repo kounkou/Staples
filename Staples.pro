@@ -1,10 +1,11 @@
-QT += qml
+QT += qml network
 
 CONFIG += c++11
 
 SOURCES += src/main.cpp \
            src/Staple.cpp \
-    src/StaplesApplication.cpp
+    src/StaplesApplication.cpp \
+    src/StaplesNetworkFactory.cpp
 
 RESOURCES += 
 
@@ -28,7 +29,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += inc/Staple.h \
-    inc/StaplesApplication.h
+    inc/StaplesApplication.h \
+    inc/StaplesNetworkFactory.h
 
 DISTFILES += \
     android/AndroidManifest.xml \
