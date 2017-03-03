@@ -40,3 +40,4 @@ TEST_F(Staple_Test, getStaplePrice)
 {
    EXPECT_EQ(0, stapleObj->getStaplePrice());
 }
+

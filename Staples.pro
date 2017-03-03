@@ -1,9 +1,10 @@
-QT += 
+QT += qml
 
 CONFIG += c++11
 
 SOURCES += src/main.cpp \
            src/Staple.cpp \
+    src/StaplesApplication.cpp
 
 RESOURCES += 
 
@@ -26,7 +27,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += inc/Staple.h
+HEADERS += inc/Staple.h \
+    inc/StaplesApplication.h
 
 DISTFILES += \
     android/AndroidManifest.xml \
