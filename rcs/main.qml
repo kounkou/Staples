@@ -3,7 +3,7 @@
 ** Copyright (C) 2015 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Staples application.
+** This file is part of the iFresh application.
 **
 ** $QT_BEGIN_LICENSE:BSD$
 ** You may use this file under the terms of the BSD license as follows:
@@ -38,24 +38,38 @@
 **
 ****************************************************************************/
 
+import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.0
+import QtQuick 2.7
 
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <QDebug>
-#include "StaplesApplication.h"
+ApplicationWindow {
+    id: window
+    visible: true
+    width: 640
+    height: 480
+    title: qsTr("Stapples")
 
-int main(int argc, char *argv[])
-{
-    QGuiApplication app(argc, argv);
+    SwipeView {
+        id: swipeView
+        anchors.fill: parent
+        currentIndex: tabBar.currentIndex
 
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QQmlApplicationEngine engine;
+        Page  {
+            Pane {}
+            Pane {}
+        }
+    }
 
-    StaplesApplication stapleApplication;
-    stapleApplication.init();
-
-    qDebug() << "offlineStoragPath orig: " << engine.offlineStoragePath();
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-
-    return app.exec();
+    footer: TabBar {
+        id: tabBar
+        currentIndex: swipeView.currentIndex
+        TabButton {
+            font.pointSize: 15
+            text: qsTr("status")
+        }
+        TabButton {
+            font.pointSize: 15
+            text: qsTr("About")
+        }
+    }
 }

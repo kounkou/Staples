@@ -4,10 +4,10 @@ CONFIG += c++11
 
 SOURCES += src/main.cpp \
            src/Staple.cpp \
-    src/StaplesApplication.cpp \
-    src/StaplesNetworkFactory.cpp
+           src/StaplesApplication.cpp \
+           src/StaplesNetworkFactory.cpp
 
-RESOURCES += 
+RESOURCES += rcs/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -39,6 +39,7 @@ DISTFILES += \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/gradlew.bat \
+    rcs/main.qml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
