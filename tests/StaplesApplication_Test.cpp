@@ -6,6 +6,7 @@
 
 class StaplesApplication_Test : public ::testing::Test
 {
+
 public:
     std::unique_ptr<StaplesApplication> stapleObj;
 
@@ -27,4 +28,14 @@ protected:
 TEST_F(StaplesApplication_Test, init)
 {
     EXPECT_EQ(0, stapleObj->init());
+}
+
+/*
+ * This shall launch a local server
+ * to perform the unit test
+ */
+TEST_F(StaplesApplication_Test, retrieveServerApplicationIPAddress)
+{
+    stapleObj->init();
+    EXPECT_EQ(0, stapleObj->retrieveServerApplicationIPAddress(QUrl("http://127.0.0.1:1500")));
 }

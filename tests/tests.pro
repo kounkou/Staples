@@ -2,6 +2,9 @@ QT += network
 
 CONFIG += c++11
 
+HEADERS += ../inc/Staple.h                \
+           ../inc/StaplesApplication.h
+
 SOURCES += main.cpp                       \
            Staple_Test.cpp                \
            StaplesApplication_Test.cpp    \
@@ -20,5 +23,3 @@ QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
-# HEADERS += ../inc/Staple.h

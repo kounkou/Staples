@@ -48,25 +48,14 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    try
-    {
-        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-        QQmlApplicationEngine engine;
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QQmlApplicationEngine engine;
 
-        StaplesApplication stapleApplication;
-        stapleApplication.init();
+    StaplesApplication stapleApplication;
+    stapleApplication.init();
 
-        qDebug() << "offlineStoragPath orig: " << engine.offlineStoragePath();
-        engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-    }
-    catch(std::exception& e)
-    {
-        qDebug() << e.what();
-    }
-    catch(...)
-    {
-        qDebug() << "Unexpected error raised !";
-    }
+    qDebug() << "offlineStoragPath orig: " << engine.offlineStoragePath();
+    // engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
     return app.exec();
 }

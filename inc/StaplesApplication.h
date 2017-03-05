@@ -13,22 +13,28 @@
 
 #include <string>
 #include "StaplesNetworkFactory.h"
+#include <QObject>
+#include <QNetworkReply>
 
-class StaplesApplication
+class StaplesApplication : public QObject
 {
+    Q_OBJECT
 
 /// public methods
 public:
-   StaplesApplication();
+   explicit StaplesApplication(QObject *parent = 0);
    virtual ~StaplesApplication();
 
    int init();
    int retrieveServerApplicationIPAddress(const QUrl &url);
 
+public slots:
+    int onResult(QNetworkReply* rep);
+
 /// protected members
 private:
    QNetworkAccessManager* _networkObj;
-   StaplesNetworkFactory _networkObjFactory;
+   StaplesNetworkFactory  _networkObjFactory;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_
