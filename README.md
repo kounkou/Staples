@@ -7,3 +7,30 @@
 
 
 Staples is an Android application that enables controlling your household staples
+The application is made of clients, and a server hosted on some personal
+machine. In my particular case, the server side is hosted on a Raspberry PI
+The server provide information with the following format :
+
+ "{\
+    "status\":\
+    "ok\",\
+    "data\":
+    {\
+       "staples\":
+       {\
+          "water\"  :
+          {
+		\"exp\"  : "20180501",
+             	\"name\" : "Vitel",
+             	\"price\": "0.50"
+          },\
+          "juice\"  :{
+		\"exp\"  : "20170501",
+             	\"name\" : "Orangina",
+             	\"price\": "1.50"          
+	  }
+          ...
+       }
+     }
+  }"
+

@@ -55,8 +55,6 @@ ApplicationWindow {
         currentIndex: tabBar.currentIndex
 
         Page  {
-            Pane {}
-            Pane {}
         }
     }
 
@@ -64,11 +62,11 @@ ApplicationWindow {
         id: tabBar
         currentIndex: swipeView.currentIndex
         TabButton {
-            font.pointSize: 15
+            font.pointSize: 13
             text: qsTr("status")
         }
         TabButton {
-            font.pointSize: 15
+            font.pointSize: 13
             text: qsTr("About")
         }
     }

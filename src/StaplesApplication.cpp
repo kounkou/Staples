@@ -16,7 +16,7 @@ int StaplesApplication::init()
 {
     int status = 1;
 
-    _networkObj = _networkObjFactory.getNetworkManager();
+    _networkObj    = _networkObjFactory.getNetworkManager();
 
     if (_networkObj != NULL)
     {
@@ -84,7 +84,7 @@ int StaplesApplication::onResult(QNetworkReply* rep)
         }
         else if (doc.isObject())
         {
-            status = 0;
+            status = 0;   
         }
     }
 

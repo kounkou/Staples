@@ -15,6 +15,8 @@
 #include "StaplesNetworkFactory.h"
 #include <QObject>
 #include <QNetworkReply>
+#include "Staple.h"
+#include <memory>
 
 class StaplesApplication : public QObject
 {
@@ -35,6 +37,7 @@ public slots:
 private:
    QNetworkAccessManager* _networkObj;
    StaplesNetworkFactory  _networkObjFactory;
+   std::vector<Staple>    _listOfStaples;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_
