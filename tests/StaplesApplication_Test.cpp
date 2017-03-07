@@ -1,12 +1,12 @@
 
 #include "StaplesApplication.cpp"
+#include "StaplesManager.cpp"
 #include <gtest/gtest.h>
 #include <memory>
 #include <string>
 
 class StaplesApplication_Test : public ::testing::Test
 {
-
 public:
     std::unique_ptr<StaplesApplication> stapleObj;
 
@@ -33,9 +33,10 @@ TEST_F(StaplesApplication_Test, init)
 /*
  * This shall launch a local server
  * to perform the unit test
+ * 192.168.0.21 is the official testing server
  */
 TEST_F(StaplesApplication_Test, retrieveServerApplicationIPAddress)
 {
     stapleObj->init();
-    EXPECT_EQ(0, stapleObj->retrieveServerApplicationIPAddress(QUrl("http://127.0.0.1:1500")));
+    EXPECT_EQ(0, stapleObj->retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500")));
 }

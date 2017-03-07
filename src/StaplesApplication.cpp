@@ -16,9 +16,10 @@ int StaplesApplication::init()
 {
     int status = 1;
 
-    _networkObj    = _networkObjFactory.getNetworkManager();
+    _networkObj     = _objFactory.getNetworkManager();
+    _staplesManager = _objFactory.getStaplesManager();
 
-    if (_networkObj != NULL)
+    if (_networkObj != NULL && _staplesManager != NULL)
     {
        QObject::connect(_networkObj, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
        status = 0;
@@ -84,7 +85,8 @@ int StaplesApplication::onResult(QNetworkReply* rep)
         }
         else if (doc.isObject())
         {
-            status = 0;   
+            // retrieve the elements
+            status = _staplesManager->retrieveStaples(doc);
         }
     }
 

@@ -3,12 +3,14 @@ QT += network
 CONFIG += c++11
 
 HEADERS += ../inc/Staple.h                \
-           ../inc/StaplesApplication.h
+           ../inc/StaplesApplication.h    \
+           ../inc/StaplesManager.h        \
+           ../inc/StaplesObjFactory.h
 
 SOURCES += main.cpp                       \
            Staple_Test.cpp                \
            StaplesApplication_Test.cpp    \
-           StaplesNetworkFactory_Test.cpp
+           StaplesObjFactory_Test.cpp
 
 INCLUDEPATH += ../inc/ \
                ../src/

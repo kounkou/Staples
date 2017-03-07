@@ -5,7 +5,8 @@ CONFIG += c++11
 SOURCES += src/main.cpp \
            src/Staple.cpp \
            src/StaplesApplication.cpp \
-           src/StaplesNetworkFactory.cpp
+           src/StaplesManager.cpp \
+           src/StaplesObjFactory.cpp
 
 RESOURCES += rcs/qml.qrc
 
@@ -30,7 +31,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += inc/Staple.h \
     inc/StaplesApplication.h \
-    inc/StaplesNetworkFactory.h
+    inc/StaplesManager.h \
+    inc/StaplesObjFactory.h
 
 DISTFILES += \
     android/AndroidManifest.xml \

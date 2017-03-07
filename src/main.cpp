@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
 
     StaplesApplication stapleApplication;
     stapleApplication.init();
+    //stapleApplication.retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
 
     qDebug() << "offlineStoragPath orig: " << engine.offlineStoragePath();
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
