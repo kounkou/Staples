@@ -96,10 +96,16 @@ int StaplesApplication::onResult(QNetworkReply* rep)
 StaplesApplication::~StaplesApplication()
 {
     if (_networkObj != NULL)
-    {
-        delete _networkObj;
+    { 
+       delete _networkObj; 
     }
     _networkObj = NULL;
+    
+    if (_staplesManager != NULL) 
+    { 
+       delete _staplesManager; 
+    }
+    _staplesManager = NULL;
 }
 
 
