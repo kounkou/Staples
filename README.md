@@ -12,6 +12,8 @@ machine. In my particular case, the server side is hosted on a Raspberry PI
 The server provide information with the following format :
 
 ```c++
+data.json
+
  "{
     "status":
     "ok",
@@ -25,3 +27,4 @@ The server provide information with the following format :
        ...
 ```
 
+The information contained inside data.json are fetched from client(s) applications.The server application is updated with *.in_json files.
