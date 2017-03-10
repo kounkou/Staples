@@ -9,6 +9,7 @@
 StaplesApplication::StaplesApplication(QObject* parent)
     : QObject(parent)
     , _networkObj(NULL)
+    , _staplesManager(NULL)
 {
 }
 
