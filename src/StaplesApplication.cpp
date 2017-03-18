@@ -11,6 +11,8 @@ StaplesApplication::StaplesApplication(QObject* parent)
     , _networkObj(NULL)
     , _staplesManager(NULL)
     , _childContext(NULL)
+    , _component(NULL)
+    , _model(NULL)
 {
 }
 
@@ -18,13 +20,17 @@ int StaplesApplication::init()
 {
     int status = 1;
 
-    _networkObj     = _objFactory.getNetworkManager();
-    _staplesManager = _objFactory.getStaplesManager();
+    _model = new StaplesModel();
+
+    _model->addStaple(20170318, "Evian",  1.80);
+    _model->addStaple(20170318, "Lactel", 2.80);
+    _model->addStaple(20170318, "Daddie", 2.00);
+    _model->addStaple(20170318, "Ducros", 3.00);
 
     // setting-up the UI
     QQmlApplicationEngine engine;
     _childContext = new QQmlContext(&engine, &engine);
-    _childContext->setContextProperty("stapleModel", this);
+    _childContext->setContextProperty("stapleModel", _model);
     _component = new QQmlComponent(&engine, &engine);
     _component->loadUrl(QUrl("qrc:/main.qml"));
 
@@ -32,6 +38,10 @@ int StaplesApplication::init()
     QObject *o = _component->create(_childContext);
     QQuickWindow* window = qobject_cast<QQuickWindow*>(o);
     window->show();
+
+    // starting services
+    _networkObj     = _objFactory.getNetworkManager();
+    _staplesManager = _objFactory.getStaplesManager();
 
     if (_networkObj != NULL && _staplesManager != NULL)
     {
@@ -42,6 +52,9 @@ int StaplesApplication::init()
     {
         status = 1;
     }
+
+    // fake request
+    retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
 
     return status;
 }
@@ -109,17 +122,11 @@ int StaplesApplication::onResult(QNetworkReply* rep)
 
 StaplesApplication::~StaplesApplication()
 {
-    if (_networkObj != NULL)
-    { 
-       delete _networkObj; 
-    }
-    _networkObj = NULL;
-    
-    if (_staplesManager != NULL) 
-    { 
-       delete _staplesManager; 
-    }
-    _staplesManager = NULL;
+    if (_networkObj     != NULL) { delete _networkObj;     } _networkObj     = NULL;
+    if (_staplesManager != NULL) { delete _staplesManager; } _staplesManager = NULL;
+    if (_childContext   != NULL) { delete _childContext;   } _childContext   = NULL;
+    if (_component      != NULL) { delete _component;      } _component      = NULL;
+    if (_model          != NULL) { delete _model;          } _model          = NULL;
 }
 
 

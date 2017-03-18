@@ -4,6 +4,7 @@
 #include "StaplesObjFactory.h"
 #include "StaplesManager.h"
 #include <QNetworkAccessManager>
+#include "StaplesModel.h"
 
 class StaplesObjFactory
 {

@@ -28,3 +28,9 @@ data.json
 ```
 
 The information contained inside data.json are fetched from client(s) applications.The server application is updated with *.in_json files.
+Here below, you can find some pictures of the application in development.
+
+<p align="center">
+  <img src="images/home.png" width="350"/>
+  <img src="images/main_screen.png" width="350"/>
+</p> 

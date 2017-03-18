@@ -49,5 +49,36 @@ ApplicationWindow {
     height: 480
     title: qsTr("Stapples")
 
-    color: "grey"
+    ColumnLayout {
+        width:  640
+        height: 480
+        spacing: 10
+
+        anchors.centerIn: parent
+
+        Component {
+            id: contactDelegate
+
+            Item {
+                width : 300
+                height: 200
+
+                ColumnLayout {
+                    Text { text: '<b>Name     :</b> ' + name }
+                    Text { text: '<b>exp. date:</b> ' + numberOfDaysBeforeExpiration }
+                    Text { text: '<b>Price    :</b> ' + price + '€' }
+                }
+            }
+        }
+
+        ListView {
+            anchors.fill: parent
+            model: stapleModel
+            delegate: contactDelegate
+            focus: true
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            clip: true
+        }
+    }
 }
