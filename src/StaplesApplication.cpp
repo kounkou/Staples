@@ -16,10 +16,8 @@ StaplesApplication::StaplesApplication(QObject* parent)
 {
 }
 
-int StaplesApplication::init()
+void StaplesApplication::initUserInterface()
 {
-    int status = 1;
-
     _model = new StaplesModel();
 
     _model->addStaple(20170318, "Evian",  1.80);
@@ -38,6 +36,11 @@ int StaplesApplication::init()
     QObject *o = _component->create(_childContext);
     QQuickWindow* window = qobject_cast<QQuickWindow*>(o);
     window->show();
+}
+
+int StaplesApplication::init()
+{
+    int status = 1;
 
     // starting services
     _networkObj     = _objFactory.getNetworkManager();

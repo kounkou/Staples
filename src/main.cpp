@@ -40,7 +40,6 @@
 
 
 #include <QGuiApplication>
-#include <QQmlApplicationEngine>
 #include <QDebug>
 #include "StaplesApplication.h"
 
@@ -50,6 +49,8 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     StaplesApplication stapleApplication;
+
+    stapleApplication.initUserInterface();
     stapleApplication.init();
 
     return app.exec();

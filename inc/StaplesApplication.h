@@ -33,8 +33,9 @@ public:
    explicit StaplesApplication(QObject *parent = 0);
    virtual ~StaplesApplication();
 
-   int init();
-   int retrieveServerApplicationIPAddress(const QUrl &url);
+   int  init();
+   int  retrieveServerApplicationIPAddress(const QUrl &url);
+   void initUserInterface();
 
 public slots:
     int onResult(QNetworkReply* rep);
