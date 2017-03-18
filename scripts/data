@@ -1,0 +1,16 @@
+{
+    "status":
+    "ok",
+    "data":
+    {
+       "staples":
+       {
+          "water"  :{ "exp"  : "20180501", "name" : "Vitel",    "price": "0.50" },
+          "Juice"  :{ "exp"  : "20170501", "name" : "Orangina", "price": "1.50" },          
+          "Desert" :{ "exp"  : "20170401", "name" : "YopLait",  "price": "2.50" },         
+          "Bread"  :{ "exp"  : "20170402", "name" : "LeBlanc",  "price": "1.50" },         
+          "Eggs"   :{ "exp"  : "20170404", "name" : "LOUE",     "price": "2.50" },         
+          "Milk"   :{ "exp"  : "20170401", "name" : "Lactel",   "price": "1.50" }         
+       }
+    }
+}
