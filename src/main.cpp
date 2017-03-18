@@ -49,13 +49,11 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QQmlApplicationEngine engine;
 
+    // QQmlApplicationEngine engine;
     StaplesApplication stapleApplication;
     stapleApplication.init();
-
-    qDebug() << "offlineStoragPath orig: " << engine.offlineStoragePath();
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+    // engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
     return app.exec();
 }

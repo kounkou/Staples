@@ -10,6 +10,7 @@ StaplesApplication::StaplesApplication(QObject* parent)
     : QObject(parent)
     , _networkObj(NULL)
     , _staplesManager(NULL)
+    , _childContext(NULL)
 {
 }
 
@@ -19,6 +20,18 @@ int StaplesApplication::init()
 
     _networkObj     = _objFactory.getNetworkManager();
     _staplesManager = _objFactory.getStaplesManager();
+
+    // setting-up the UI
+    QQmlApplicationEngine engine;
+    _childContext = new QQmlContext(&engine, &engine);
+    _childContext->setContextProperty("stapleModel", this);
+    _component = new QQmlComponent(&engine, &engine);
+    _component->loadUrl(QUrl("qrc:/main.qml"));
+
+    // Create component in child context
+    QObject *o = _component->create(_childContext);
+    QQuickWindow* window = qobject_cast<QQuickWindow*>(o);
+    window->show();
 
     if (_networkObj != NULL && _staplesManager != NULL)
     {

@@ -17,6 +17,11 @@
 #include <QNetworkReply>
 #include "StaplesManager.h"
 
+#include <QtQml/QQmlApplicationEngine>
+#include <QtQuick/QQuickWindow>
+#include <QtQml/QQmlContext>
+#include <QtQml/QQmlComponent>
+
 class StaplesApplication : public QObject
 {
     Q_OBJECT
@@ -37,6 +42,9 @@ private:
    QNetworkAccessManager* _networkObj;
    StaplesObjFactory      _objFactory;
    StaplesManager*        _staplesManager;
+
+   QQmlContext*           _childContext;
+   QQmlComponent*         _component;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_
