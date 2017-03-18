@@ -5,12 +5,14 @@ CONFIG += c++11
 HEADERS += ../inc/Staple.h                \
            ../inc/StaplesApplication.h    \
            ../inc/StaplesManager.h        \
-           ../inc/StaplesObjFactory.h
+           ../inc/StaplesObjFactory.h     \
+           ../inc/StaplesModel.h
 
 SOURCES += main.cpp                       \
            Staple_Test.cpp                \
            StaplesApplication_Test.cpp    \
-           StaplesObjFactory_Test.cpp
+           StaplesObjFactory_Test.cpp     \
+           StaplesModel_Test.cpp
 
 INCLUDEPATH += ../inc/ \
                ../src/

@@ -6,7 +6,8 @@ SOURCES += src/main.cpp \
            src/Staple.cpp \
            src/StaplesApplication.cpp \
            src/StaplesManager.cpp \
-           src/StaplesObjFactory.cpp
+           src/StaplesObjFactory.cpp \
+           src/StaplesModel.cpp
 
 RESOURCES += rcs/qml.qrc
 
@@ -32,7 +33,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += inc/Staple.h \
     inc/StaplesApplication.h \
     inc/StaplesManager.h \
-    inc/StaplesObjFactory.h
+    inc/StaplesObjFactory.h \
+    inc/StaplesModel.h
 
 DISTFILES += \
     android/AndroidManifest.xml \

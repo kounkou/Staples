@@ -48,26 +48,4 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Stapples")
-
-    SwipeView {
-        id: swipeView
-        anchors.fill: parent
-        currentIndex: tabBar.currentIndex
-
-        Page  {
-        }
-    }
-
-    footer: TabBar {
-        id: tabBar
-        currentIndex: swipeView.currentIndex
-        TabButton {
-            font.pointSize: 13
-            text: qsTr("status")
-        }
-        TabButton {
-            font.pointSize: 13
-            text: qsTr("About")
-        }
-    }
 }

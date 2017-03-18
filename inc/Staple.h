@@ -17,12 +17,13 @@ class Staple
 
 /// public methods
 public:
-   Staple();
-   virtual ~Staple(); 
+            Staple();
+   virtual ~Staple();
+            Staple(unsigned int _daysBeforeExpiration, std::string _stapleName, float _staplePrice);
 
-   unsigned int getNumberOfDaysBeforeExpiration();
-   std::string  getStapleName();
-   float        getStaplePrice();
+   unsigned int numberOfDaysBeforeExpiration() const;
+   std::string  name() const;
+   float        price() const;
 
 /// protected members
 protected:

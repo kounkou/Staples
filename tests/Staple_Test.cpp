@@ -27,17 +27,17 @@ protected:
 
 TEST_F(Staple_Test, getNumberOfDaysBeforeExpiration)
 {
-   EXPECT_EQ(0, stapleObj->getNumberOfDaysBeforeExpiration());
+   EXPECT_EQ(0, stapleObj->numberOfDaysBeforeExpiration());
 }
 
 TEST_F(Staple_Test, getStapleName)
 {
    std::string stapleName("");
-   EXPECT_EQ(stapleName, stapleObj->getStapleName());
+   EXPECT_EQ(stapleName, stapleObj->name());
 }
 
 TEST_F(Staple_Test, getStaplePrice)
 {
-   EXPECT_EQ(0, stapleObj->getStaplePrice());
+   EXPECT_EQ(0, stapleObj->price());
 }
 
