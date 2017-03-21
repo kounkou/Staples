@@ -6,6 +6,9 @@
 #include <QDebug>
 #include <QJsonArray>
 
+#include <QQuickView>
+#include <QQmlContext>
+
 StaplesApplication::StaplesApplication(QObject* parent)
     : QObject(parent)
     , _networkObj(NULL)
@@ -18,12 +21,13 @@ StaplesApplication::StaplesApplication(QObject* parent)
 
 void StaplesApplication::initUserInterface()
 {
-    _model = new StaplesModel();
+    _model = StaplesModel::getInstance();
 
-    _model->addStaple(20170318, "Evian",  1.80);
-    _model->addStaple(20170318, "Lactel", 2.80);
-    _model->addStaple(20170318, "Daddie", 2.00);
-    _model->addStaple(20170318, "Ducros", 3.00);
+    _model->addStaple(20170318, "Ducros", 3.04);
+    _model->addStaple(20170318, "Evian",  1.85);
+    _model->addStaple(20170318, "Lactel", 2.82);
+    _model->addStaple(20170318, "Daddie", 2.04);
+    _model->addStaple(20170318, "Kebab",  6.52);
 
     // setting-up the UI
     QQmlApplicationEngine engine;
@@ -35,6 +39,7 @@ void StaplesApplication::initUserInterface()
     // Create component in child context
     QObject *o = _component->create(_childContext);
     QQuickWindow* window = qobject_cast<QQuickWindow*>(o);
+
     window->show();
 }
 
@@ -57,7 +62,7 @@ int StaplesApplication::init()
     }
 
     // fake request
-    retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
+    // retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
 
     return status;
 }
@@ -67,7 +72,7 @@ int StaplesApplication::init()
  * RPI IP address that is being updated
  * accordingly on the server side.
  */
-int StaplesApplication::retrieveServerApplicationIPAddress(const QUrl& url)
+int StaplesApplication::retrieveServerApplicationIPAddress(const QUrl& url) const
 {
     qDebug() << "retrieveServerApplicationIPAddress";
 

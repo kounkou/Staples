@@ -34,7 +34,7 @@ public:
    virtual ~StaplesApplication();
 
    int  init();
-   int  retrieveServerApplicationIPAddress(const QUrl &url);
+   int  retrieveServerApplicationIPAddress(const QUrl &url) const;
    void initUserInterface();
 
 public slots:

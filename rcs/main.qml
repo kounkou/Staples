@@ -49,36 +49,37 @@ ApplicationWindow {
     height: 480
     title: qsTr("Stapples")
 
-    ColumnLayout {
-        width:  640
-        height: 480
-        spacing: 10
-
+    Rectangle {
+        width: 180
+        height: 200
         anchors.centerIn: parent
 
         Component {
             id: contactDelegate
 
             Item {
-                width : 300
-                height: 200
+                width: 180
+                height: 40
 
-                ColumnLayout {
+                Column {
                     Text { text: '<b>Name     :</b> ' + name }
                     Text { text: '<b>exp. date:</b> ' + numberOfDaysBeforeExpiration }
-                    Text { text: '<b>Price    :</b> ' + price + '€' }
+                    Text { text: '<b>Price    :</b> ' + Math.round(price * 100) / 100 + '€' }
                 }
             }
         }
 
         ListView {
+            id:contactList
             anchors.fill: parent
             model: stapleModel
             delegate: contactDelegate
+            highlight: Rectangle {
+                color: "lightgrey"
+                radius: 5
+            }
+            spacing: 5
             focus: true
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            clip: true
         }
     }
 }
