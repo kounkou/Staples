@@ -59,7 +59,7 @@ ApplicationWindow {
 
                 Label {
                     id: staplePrice
-                    font.pointSize: 30
+                    font.pointSize: 15
                     text: '€' + Math.round(price * 100) / 100
                     anchors.centerIn: parent
                 }
