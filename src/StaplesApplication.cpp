@@ -23,24 +23,11 @@ void StaplesApplication::initUserInterface()
 {
     _model = StaplesModel::getInstance();
 
-    _model->addStaple(20170318, "Ducros", 3.04);
-    _model->addStaple(20170318, "Evian",  1.85);
-    _model->addStaple(20170318, "Lactel", 2.82);
-    _model->addStaple(20170318, "Daddie", 2.04);
-    _model->addStaple(20170318, "Kebab",  6.52);
-
     // setting-up the UI
-    QQmlApplicationEngine engine;
-    _childContext = new QQmlContext(&engine, &engine);
-    _childContext->setContextProperty("stapleModel", _model);
-    _component = new QQmlComponent(&engine, &engine);
-    _component->loadUrl(QUrl("qrc:/main.qml"));
-
-    // Create component in child context
-    QObject *o = _component->create(_childContext);
-    QQuickWindow* window = qobject_cast<QQuickWindow*>(o);
-
-    window->show();
+    QQuickView *view = new QQuickView;
+    view->rootContext()->setContextProperty("stapleModel", _model);
+    view->setSource(QUrl("qrc:/main.qml"));
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
 }
 
 int StaplesApplication::init()
@@ -61,8 +48,10 @@ int StaplesApplication::init()
         status = 1;
     }
 
+
+
     // fake request
-    // retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
+    retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
 
     return status;
 }
@@ -121,6 +110,7 @@ int StaplesApplication::onResult(QNetworkReply* rep)
         else if (doc.isObject())
         {
             // retrieve the elements
+            qDebug() << "retrieving information ";
             status = _staplesManager->retrieveStaples(doc);
         }
     }
