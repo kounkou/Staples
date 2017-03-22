@@ -44,6 +44,13 @@ DISTFILES += \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
-    rcs/main.qml
+    rcs/main.qml \
+    qml/Characteristics.qml \
+    qml/Dialog.qml \
+    qml/Header.qml \
+    qml/Label.qml \
+    qml/main.qml \
+    qml/Menu.qml \
+    qml/Services.qml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

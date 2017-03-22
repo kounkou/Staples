@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="main.qml">main.qml</file>
+        <file alias="main.qml">../qml/main.qml</file>
         <file alias="qtquickcontrols2.conf">../conf/qtquickcontrols2.conf</file>
+        <file alias="busy_dark.png">../rcs/busy_dark.png</file>
     </qresource>
 </RCC>
