@@ -16,6 +16,7 @@ StaplesApplication::StaplesApplication(QObject* parent)
     , _childContext(NULL)
     , _component(NULL)
     , _model(NULL)
+    , _view(NULL)
 {
 }
 
@@ -24,7 +25,7 @@ void StaplesApplication::initUserInterface()
     _model = StaplesModel::getInstance();
 
     // setting-up the UI
-    QQuickView *view = new QQuickView;
+    _view = new QQuickView;
     view->rootContext()->setContextProperty("stapleModel", _model);
     view->setSource(QUrl("qrc:/main.qml"));
     view->setResizeMode(QQuickView::SizeRootObjectToView);
@@ -125,6 +126,7 @@ StaplesApplication::~StaplesApplication()
     if (_childContext   != NULL) { delete _childContext;   } _childContext   = NULL;
     if (_component      != NULL) { delete _component;      } _component      = NULL;
     if (_model          != NULL) { delete _model;          } _model          = NULL;
+    if (_view           != NULL) { delete _view;           } _view           = NULL;
 }
 
 
