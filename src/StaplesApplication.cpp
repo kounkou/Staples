@@ -5,16 +5,12 @@
 #include <QJsonObject>
 #include <QDebug>
 #include <QJsonArray>
-
-#include <QQuickView>
 #include <QQmlContext>
 
 StaplesApplication::StaplesApplication(QObject* parent)
     : QObject(parent)
     , _networkObj(NULL)
     , _staplesManager(NULL)
-    , _childContext(NULL)
-    , _component(NULL)
     , _model(NULL)
     , _view(NULL)
 {
@@ -123,8 +119,6 @@ StaplesApplication::~StaplesApplication()
 {
     if (_networkObj     != NULL) { delete _networkObj;     } _networkObj     = NULL;
     if (_staplesManager != NULL) { delete _staplesManager; } _staplesManager = NULL;
-    if (_childContext   != NULL) { delete _childContext;   } _childContext   = NULL;
-    if (_component      != NULL) { delete _component;      } _component      = NULL;
     if (_model          != NULL) { delete _model;          } _model          = NULL;
     if (_view           != NULL) { delete _view;           } _view           = NULL;
 }

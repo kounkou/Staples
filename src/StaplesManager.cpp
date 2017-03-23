@@ -1,7 +1,6 @@
 
 #include "StaplesManager.h"
 #include "StaplesModel.h"
-
 #include <sstream>
 
 StaplesManager::StaplesManager()

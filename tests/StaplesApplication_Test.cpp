@@ -1,6 +1,5 @@
 
 #include "StaplesApplication.cpp"
-#include "StaplesManager.cpp"
 #include <gtest/gtest.h>
 #include <memory>
 #include <string>
