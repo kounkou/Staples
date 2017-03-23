@@ -26,9 +26,9 @@ void StaplesApplication::initUserInterface()
 
     // setting-up the UI
     _view = new QQuickView;
-    view->rootContext()->setContextProperty("stapleModel", _model);
-    view->setSource(QUrl("qrc:/main.qml"));
-    view->setResizeMode(QQuickView::SizeRootObjectToView);
+    _view->rootContext()->setContextProperty("stapleModel", _model);
+    _view->setSource(QUrl("qrc:/main.qml"));
+    _view->setResizeMode(QQuickView::SizeRootObjectToView);
 }
 
 int StaplesApplication::init()
