@@ -46,7 +46,7 @@ int StaplesApplication::init()
     }
 
     // fake request
-    // retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
+    retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
 
     return status;
 }
