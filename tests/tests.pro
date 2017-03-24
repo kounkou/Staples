@@ -12,7 +12,8 @@ SOURCES += main.cpp                       \
            Staple_Test.cpp                \
            StaplesApplication_Test.cpp    \
            StaplesObjFactory_Test.cpp     \
-           StaplesModel_Test.cpp
+           StaplesModel_Test.cpp          \
+           StaplesManager_Test.cpp
 
 INCLUDEPATH += ../inc/ \
                ../src/

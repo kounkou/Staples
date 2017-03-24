@@ -28,3 +28,8 @@ TEST_F(StaplesModel_Test, rowCount)
 {
     EXPECT_EQ(0, stapleObj->rowCount());
 }
+
+TEST_F(StaplesModel_Test, staplesContainerSize)
+{
+    EXPECT_EQ(0, stapleObj->staplesContainerSize());
+}

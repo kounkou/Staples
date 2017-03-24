@@ -1,6 +1,5 @@
 
 #include "StaplesApplication.cpp"
-#include "StaplesManager.cpp"
 #include <gtest/gtest.h>
 #include <memory>
 #include <string>
@@ -39,4 +38,11 @@ TEST_F(StaplesApplication_Test, retrieveServerApplicationIPAddress)
 {
     stapleObj->init();
     EXPECT_EQ(0, stapleObj->retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500")));
+}
+
+TEST_F(StaplesApplication_Test, onResult)
+{
+    // QNetworkReply* rep = NULL;
+    // This interrupts the tests abruptly
+    // EXPECT_EQ(1, stapleObj->onResult(rep));
 }

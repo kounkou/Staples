@@ -24,12 +24,20 @@ protected:
    virtual void TearDown() {}
 };
 
+/* Testing the factory with different type of object */
 TEST_F(StaplesObjFactory_Test, getNetworkManager)
 {
-    EXPECT_EQ(true, (stapleObj->getNetworkManager() != NULL));
+    QNetworkAccessManager* _nt = NULL;
+    int* _intPtr = NULL;
+    int  _int    = 9;
+    _intPtr      = &_int;
+
+    EXPECT_EQ(true, (stapleObj->get(_nt)     != NULL));
+    EXPECT_EQ(true, (stapleObj->get(_intPtr) != NULL));
 }
 
 TEST_F(StaplesObjFactory_Test, getStaplesManager)
 {
-    EXPECT_EQ(true, (stapleObj->getStaplesManager() != NULL));
+    StaplesManager* _st = NULL;
+    EXPECT_EQ(true, (stapleObj->get(_st) != NULL));
 }

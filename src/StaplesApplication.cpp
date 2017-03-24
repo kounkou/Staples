@@ -5,37 +5,26 @@
 #include <QJsonObject>
 #include <QDebug>
 #include <QJsonArray>
+#include <QQmlContext>
 
 StaplesApplication::StaplesApplication(QObject* parent)
     : QObject(parent)
     , _networkObj(NULL)
     , _staplesManager(NULL)
-    , _childContext(NULL)
-    , _component(NULL)
     , _model(NULL)
+    , _view(NULL)
 {
 }
 
 void StaplesApplication::initUserInterface()
 {
-    _model = new StaplesModel();
-
-    _model->addStaple(20170318, "Evian",  1.80);
-    _model->addStaple(20170318, "Lactel", 2.80);
-    _model->addStaple(20170318, "Daddie", 2.00);
-    _model->addStaple(20170318, "Ducros", 3.00);
+    _model = StaplesModel::getInstance();
 
     // setting-up the UI
-    QQmlApplicationEngine engine;
-    _childContext = new QQmlContext(&engine, &engine);
-    _childContext->setContextProperty("stapleModel", _model);
-    _component = new QQmlComponent(&engine, &engine);
-    _component->loadUrl(QUrl("qrc:/main.qml"));
-
-    // Create component in child context
-    QObject *o = _component->create(_childContext);
-    QQuickWindow* window = qobject_cast<QQuickWindow*>(o);
-    window->show();
+    _view = new QQuickView;
+    _view->rootContext()->setContextProperty("stapleModel", _model);
+    _view->setSource(QUrl("qrc:/main.qml"));
+    _view->setResizeMode(QQuickView::SizeRootObjectToView);
 }
 
 int StaplesApplication::init()
@@ -43,8 +32,8 @@ int StaplesApplication::init()
     int status = 1;
 
     // starting services
-    _networkObj     = _objFactory.getNetworkManager();
-    _staplesManager = _objFactory.getStaplesManager();
+    _networkObj     = _objFactory.get(_networkObj);
+    _staplesManager = _objFactory.get(_staplesManager);
 
     if (_networkObj != NULL && _staplesManager != NULL)
     {
@@ -57,7 +46,7 @@ int StaplesApplication::init()
     }
 
     // fake request
-    retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
+    // retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
 
     return status;
 }
@@ -67,7 +56,7 @@ int StaplesApplication::init()
  * RPI IP address that is being updated
  * accordingly on the server side.
  */
-int StaplesApplication::retrieveServerApplicationIPAddress(const QUrl& url)
+int StaplesApplication::retrieveServerApplicationIPAddress(const QUrl& url) const
 {
     qDebug() << "retrieveServerApplicationIPAddress";
 
@@ -116,6 +105,7 @@ int StaplesApplication::onResult(QNetworkReply* rep)
         else if (doc.isObject())
         {
             // retrieve the elements
+            qDebug() << "retrieving information ";
             status = _staplesManager->retrieveStaples(doc);
         }
     }
@@ -127,9 +117,8 @@ StaplesApplication::~StaplesApplication()
 {
     if (_networkObj     != NULL) { delete _networkObj;     } _networkObj     = NULL;
     if (_staplesManager != NULL) { delete _staplesManager; } _staplesManager = NULL;
-    if (_childContext   != NULL) { delete _childContext;   } _childContext   = NULL;
-    if (_component      != NULL) { delete _component;      } _component      = NULL;
     if (_model          != NULL) { delete _model;          } _model          = NULL;
+    if (_view           != NULL) { delete _view;           } _view           = NULL;
 }
 
 

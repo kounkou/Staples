@@ -16,9 +16,6 @@ public:
    ~StaplesManager();
 
     int retrieveStaples(const QJsonDocument& doc);
-
-private:
-    std::vector<Staple> _listOfStaples;
 };
 
 #endif

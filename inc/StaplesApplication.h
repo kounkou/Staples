@@ -16,12 +16,7 @@
 #include <QObject>
 #include <QNetworkReply>
 #include "StaplesManager.h"
-
-#include <QtQml/QQmlApplicationEngine>
-#include <QtQuick/QQuickWindow>
-#include <QtQml/QQmlContext>
-#include <QtQml/QQmlComponent>
-
+#include <QQuickView>
 #include "StaplesModel.h"
 
 class StaplesApplication : public QObject
@@ -34,7 +29,7 @@ public:
    virtual ~StaplesApplication();
 
    int  init();
-   int  retrieveServerApplicationIPAddress(const QUrl &url);
+   int  retrieveServerApplicationIPAddress(const QUrl &url) const;
    void initUserInterface();
 
 public slots:
@@ -45,9 +40,8 @@ private:
    QNetworkAccessManager* _networkObj;
    StaplesObjFactory      _objFactory;
    StaplesManager*        _staplesManager;
-   QQmlContext*           _childContext;
-   QQmlComponent*         _component;
    StaplesModel*          _model;
+   QQuickView*            _view;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_

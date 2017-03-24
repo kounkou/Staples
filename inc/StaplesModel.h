@@ -25,16 +25,19 @@ public:
    StaplesModel(QObject* parent = 0);
   ~StaplesModel();
 
+   static StaplesModel* getInstance();
+   int staplesContainerSize() const;
+
    int      rowCount(const QModelIndex& parent = QModelIndex())        const;
    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
    
 protected:
-   QHash<int, QByteArray> roleExpirationDate() const;
-   QHash<int, QByteArray> roleNames()          const;
-   QHash<int, QByteArray> rolePrice()          const;
+   QHash<int, QByteArray> roleNames() const;
+   QHash<int, QByteArray> roleIds()   const;
 
 private:
-   std::vector<Staple> _staplesContainer;
+   std::vector<Staple>  _staplesContainer;
+   static StaplesModel* _pInstance;
 };
 
 #endif
