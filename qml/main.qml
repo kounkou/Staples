@@ -8,35 +8,52 @@ ApplicationWindow {
     visible: true
     width :Screen.width
     height:Screen.height
-    title: qsTr("Stapples")
+    title: qsTr("Staples")
+
+    Rectangle {
+        id : header
+        width: parent.width
+        height: 200
+        border.width: 1
+        border.color: "lightgrey"
+
+        Text {
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            anchors.fill: parent
+            text: "Staples"
+            font.bold: true
+            font.pointSize: 20
+            elide: Text.ElideMiddle
+            color: "#363636"
+        }
+    }
 
     Rectangle {
         width : window.width
-        height: window.height
+        height: window.height - header.height
 
-        anchors.top : window.top
-        anchors.topMargin: 100
-        anchors.centerIn: parent
+        anchors.top : header.bottom
+        anchors.topMargin: 0
+        // anchors.centerIn: parent
 
         color: "white"
+        clip: true
 
         Component {
             id: contactDelegate
 
             Rectangle {
                 id: box
-                height:100
+                height:150
                 width: parent.width
-                color: "lightsteelblue"
-                border.width: 2
+                color: "white"
+                border.width: 1
                 border.color: "lightgrey"
 
                 anchors.leftMargin  : 20
                 anchors.rightMargin : 20
-                anchors.topMargin   : 20
                 anchors.bottomMargin: 20
-
-                radius: 5
 
                 Component.onCompleted: {
                 }
@@ -50,28 +67,48 @@ ApplicationWindow {
                 Label {
                     id: stapleName
                     text: name
+                    color: "black"
                     font.pointSize: 15
-                    anchors.top: parent.top
-                    anchors.topMargin: 5
-                    anchors.leftMargin: 5
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.bold : true
+                    anchors.left      : box.left
+                    anchors.leftMargin: 10
+                    anchors.top       : box.top
+                    anchors.topMargin : 5
                 }
 
                 Label {
                     id: staplePrice
-                    font.pointSize: 15
-                    text: '€' + Math.round(price * 100) / 100
-                    anchors.centerIn: parent
+                    font.pointSize: 13
+                    text: "Product costs €" + Math.round(price * 100) / 100
+                    color: "grey"
+                    anchors.left        : box.left
+                    anchors.leftMargin  : 10
+                    anchors.top         : stapleName.bottom
+                    anchors.topMargin   : 5
                 }
 
                 Label {
                     id: stapleExpirationDate
-                    font.pointSize: 15
-                    text: numberOfDaysBeforeExpiration
-                    anchors.bottom: box.bottom
+                    font.pointSize: 13
+                    wrapMode: Text.WordWrap
+                    text: "This product will expire on " + numberOfDaysBeforeExpiration +
+                          "<br> according to Staples calculations."
+                    color: "lightgrey"
+                    anchors.left        : box.left
+                    anchors.leftMargin  : 10
+                    anchors.top         : staplePrice.bottom
+                    anchors.topMargin   : 5
                     anchors.bottomMargin: 5
-                    anchors.leftMargin: 5
-                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Image {
+                    id: stapleImage
+                    anchors.right: box.right
+                    anchors.rightMargin: 10
+                    width: 50
+                    height: 50
+                    anchors.verticalCenter: box.verticalCenter
+                    source: "qrc:/raw-food.svg"
                 }
             }
         }
@@ -87,7 +124,7 @@ ApplicationWindow {
                 radius: 5
             }
 
-            spacing: 5
+            spacing: 0
             focus: false
         }
     }
