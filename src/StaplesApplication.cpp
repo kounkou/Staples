@@ -32,8 +32,8 @@ int StaplesApplication::init()
     int status = 1;
 
     // starting services
-    _networkObj     = _objFactory.getNetworkManager();
-    _staplesManager = _objFactory.getStaplesManager();
+    _networkObj     = _objFactory.get(_networkObj);
+    _staplesManager = _objFactory.get(_staplesManager);
 
     if (_networkObj != NULL && _staplesManager != NULL)
     {
@@ -45,10 +45,8 @@ int StaplesApplication::init()
         status = 1;
     }
 
-
-
     // fake request
-    retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
+    // retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
 
     return status;
 }

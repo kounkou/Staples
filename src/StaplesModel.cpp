@@ -20,12 +20,19 @@ void StaplesModel::addStaple(unsigned int expirationDate, std::string name, floa
     endInsertRows();
 }
 
-StaplesModel::StaplesModel(QObject *parent) : QAbstractListModel(parent)
+StaplesModel::StaplesModel(QObject *parent)
+    : QAbstractListModel(parent)
+    , _staplesContainer(std::vector<Staple>())
 {
 }
 
 StaplesModel::~StaplesModel()
 {
+}
+
+int StaplesModel::staplesContainerSize() const
+{
+    return _staplesContainer.size();
 }
 
 QHash<int, QByteArray> StaplesModel::roleNames() const
