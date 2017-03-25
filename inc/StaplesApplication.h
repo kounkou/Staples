@@ -29,7 +29,7 @@ public:
    virtual ~StaplesApplication();
 
    int  init();
-   int  retrieveServerApplicationIPAddress(const QUrl &url) const;
+   int  retrieveListOfStaples(const QUrl& url) const;
    void initUserInterface();
 
 public slots:

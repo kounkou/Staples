@@ -46,7 +46,8 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
 
             _model->addStaple((staples[ss].toMap())["exp"].toInt(),
                               (staples[ss].toMap())["name"].toString().toStdString(),
-                              (staples[ss].toMap())["price"].toFloat());
+                              (staples[ss].toMap())["price"].toFloat(),
+                              (staples[ss].toMap())["qty"].toInt());
         }
 
         status = 0;
