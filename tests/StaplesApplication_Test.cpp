@@ -29,15 +29,10 @@ TEST_F(StaplesApplication_Test, init)
     EXPECT_EQ(0, stapleObj->init());
 }
 
-/*
- * This shall launch a local server
- * to perform the unit test
- * 192.168.0.21 is the official testing server
- */
-TEST_F(StaplesApplication_Test, retrieveServerApplicationIPAddress)
+TEST_F(StaplesApplication_Test, retrieveListOfStaples)
 {
     stapleObj->init();
-    EXPECT_EQ(0, stapleObj->retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500")));
+    EXPECT_EQ(0, stapleObj->retrieveListOfStaples(QUrl("http://192.168.0.21:1500")));
 }
 
 TEST_F(StaplesApplication_Test, onResult)
