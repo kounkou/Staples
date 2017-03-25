@@ -41,11 +41,17 @@ TEST_F(Staple_Test, getStaplePrice)
    EXPECT_EQ(0, stapleObj->price());
 }
 
+TEST_F(Staple_Test, getStapleQuantity)
+{
+    EXPECT_EQ(0, stapleObj->quantity());
+}
+
 TEST_F(Staple_Test, Staple)
 {
-    Staple st(20170809, "TestSt", 0.67f);
+    Staple st(20170809, "TestSt", 0.67f, 2);
 
     EXPECT_EQ(20170809, st.numberOfDaysBeforeExpiration());
     EXPECT_EQ("TestSt", st.name());
     EXPECT_EQ(0.67f,    st.price());
+    EXPECT_EQ(2,        st.quantity());
 }

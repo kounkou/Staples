@@ -25,7 +25,7 @@ ApplicationWindow {
             font.bold: true
             font.pointSize: 20
             elide: Text.ElideMiddle
-            color: "#363636"
+            color: "#212121"
         }
     }
 
@@ -35,7 +35,6 @@ ApplicationWindow {
 
         anchors.top : header.bottom
         anchors.topMargin: 0
-        // anchors.centerIn: parent
 
         color: "white"
         clip: true
@@ -67,7 +66,7 @@ ApplicationWindow {
                 Label {
                     id: stapleName
                     text: name
-                    color: "black"
+                    color: "#212121"
                     font.pointSize: 15
                     font.bold : true
                     anchors.left      : box.left
@@ -80,7 +79,7 @@ ApplicationWindow {
                     id: staplePrice
                     font.pointSize: 13
                     text: "Product costs €" + Math.round(price * 100) / 100
-                    color: "grey"
+                    color: "#424242"
                     anchors.left        : box.left
                     anchors.leftMargin  : 10
                     anchors.top         : stapleName.bottom
@@ -93,7 +92,7 @@ ApplicationWindow {
                     wrapMode: Text.WordWrap
                     text: "This product will expire on " + numberOfDaysBeforeExpiration +
                           "<br> according to Staples calculations."
-                    color: "lightgrey"
+                    color: "#9e9e9e"
                     anchors.left        : box.left
                     anchors.leftMargin  : 10
                     anchors.top         : staplePrice.bottom
@@ -101,12 +100,34 @@ ApplicationWindow {
                     anchors.bottomMargin: 5
                 }
 
+                Rectangle {
+                    id: stapleQuantity
+
+                    Label {
+                        font.pointSize: 10
+                        text: quantity
+                        color: "#ffffff"
+                        anchors.centerIn: stapleQuantity
+                    }
+
+                    height: stapleImage.height/2
+                    width: stapleImage.width/2
+                    color: quantity > 2 ? "#00c853" : "#dd2c00"
+                    radius: stapleImage.height/4
+
+                    anchors.right: stapleImage.left
+                    anchors.verticalCenter: box.verticalCenter
+                    anchors.rightMargin: -10
+                    z : 1
+                    anchors.bottomMargin: 10
+                }
+
                 Image {
                     id: stapleImage
                     anchors.right: box.right
                     anchors.rightMargin: 10
-                    width: 50
-                    height: 50
+                    width: box.height/2
+                    height: box.height/2
                     anchors.verticalCenter: box.verticalCenter
                     source: "qrc:/raw-food.svg"
                 }
@@ -118,12 +139,6 @@ ApplicationWindow {
             anchors.fill: parent
             model: stapleModel
             delegate: contactDelegate
-
-            highlight: Rectangle {
-                color: "lightgrey"
-                radius: 5
-            }
-
             spacing: 0
             focus: false
         }

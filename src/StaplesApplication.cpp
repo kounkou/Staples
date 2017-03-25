@@ -46,17 +46,12 @@ int StaplesApplication::init()
     }
 
     // fake request
-    retrieveServerApplicationIPAddress(QUrl("http://192.168.0.21:1500"));
+    retrieveListOfStaples(QUrl("http://192.168.0.21:1500"));
 
     return status;
 }
 
-/*
- * This method will retrieve the current
- * RPI IP address that is being updated
- * accordingly on the server side.
- */
-int StaplesApplication::retrieveServerApplicationIPAddress(const QUrl& url) const
+int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
 {
     qDebug() << "retrieveServerApplicationIPAddress";
 

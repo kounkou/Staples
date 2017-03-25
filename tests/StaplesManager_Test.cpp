@@ -26,7 +26,14 @@ protected:
 
 TEST_F(StaplesManager_Test, retrieveStaples)
 {
+    QVariantMap map;
+    map.insert("integer", 1);
+    map.insert("double", 2.34);
+    map.insert("bool", QVariant(true));
+    map.insert("string", "word");
+    QJsonObject object = QJsonObject::fromVariantMap(map);
     QJsonDocument doc;
+    doc.setObject(object);
 
     EXPECT_EQ(1, stapleObj->retrieveStaples(doc));
 }

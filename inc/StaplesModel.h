@@ -10,7 +10,8 @@ enum StaplesRoles
 {
    ExpirationDateRole = Qt::UserRole + 1,
    NameRole           = Qt::UserRole + 2,
-   PriceRole          = Qt::UserRole + 3
+   PriceRole          = Qt::UserRole + 3,
+   QuantityRole       = Qt::UserRole + 4
 };
 
 class StaplesModel : public QAbstractListModel 
@@ -20,7 +21,8 @@ class StaplesModel : public QAbstractListModel
 public slots:
    void addStaple(unsigned int expirationDate,
                   std::string  name,
-                  float        price);
+                  float        price,
+                  unsigned int quantity);
 public:
    StaplesModel(QObject* parent = 0);
   ~StaplesModel();
