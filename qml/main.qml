@@ -14,10 +14,8 @@ ApplicationWindow {
     Rectangle {
         id : header
         width: parent.width
-        height: 300
-        // border.width: 1
-        // border.color: "lightgrey"
-        Material.elevation: 2
+        height: Screen.height/3
+        Material.elevation: 10
 
         Image {
             id: staplesImage
@@ -70,8 +68,7 @@ ApplicationWindow {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
-                    }
+                    onClicked: {}
                 }
 
                 Label {
@@ -150,8 +147,8 @@ ApplicationWindow {
             anchors.fill: parent
             model: stapleModel
             delegate: contactDelegate
-            spacing: 0
-            focus: false
+            spacing: -1
+            focus: true
         }
     }
 }
