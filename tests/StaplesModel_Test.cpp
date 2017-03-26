@@ -41,3 +41,6 @@ TEST_F(StaplesModel_Test, data)
 
     EXPECT_EQ(true,  var != "");
 }
+
+TEST_F(StaplesModel_Test, addStaple)
+{}
