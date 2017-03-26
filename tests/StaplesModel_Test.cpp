@@ -43,4 +43,9 @@ TEST_F(StaplesModel_Test, data)
 }
 
 TEST_F(StaplesModel_Test, addStaple)
-{}
+{
+    stapleObj->addStaple("Jan 01 2017", "Test Model", 0.78, 3);
+    stapleObj->addStaple("Jan 01 2017", "Test Model", 0.78, 3);
+
+    EXPECT_EQ(2, stapleObj->staplesContainerSize());
+}
