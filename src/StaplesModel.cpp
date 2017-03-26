@@ -13,7 +13,7 @@ StaplesModel* StaplesModel::getInstance()
     return _pInstance;
 }
 
-void StaplesModel::addStaple(unsigned int expirationDate, std::string name, float price, unsigned int quantity)
+void StaplesModel::addStaple(std::string expirationDate, std::string name, float price, unsigned int quantity)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     _staplesContainer.push_back(Staple(expirationDate, name, price, quantity));
@@ -62,7 +62,7 @@ QVariant StaplesModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == NameRole)           { return QString::fromStdString(staple.name()); }
-    if (role == ExpirationDateRole) { return staple.numberOfDaysBeforeExpiration(); }
+    if (role == ExpirationDateRole) { return QString::fromStdString(staple.numberOfDaysBeforeExpiration()); }
     if (role == PriceRole)          { return staple.price(); }
     if (role == QuantityRole)       { return staple.quantity(); }
 

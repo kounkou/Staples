@@ -44,7 +44,7 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
         {
             QString ss = QString("s%1").arg(ii);
 
-            _model->addStaple((staples[ss].toMap())["exp"].toInt(),
+            _model->addStaple((staples[ss].toMap())["exp"].toString().toStdString(),
                               (staples[ss].toMap())["name"].toString().toStdString(),
                               (staples[ss].toMap())["price"].toFloat(),
                               (staples[ss].toMap())["qty"].toInt());

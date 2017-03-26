@@ -19,16 +19,16 @@ class Staple
 public:
             Staple();
    virtual ~Staple();
-            Staple(unsigned int _daysBeforeExpiration, std::string _stapleName, float _staplePrice, unsigned int _stapleQuantity);
+            Staple(std::string _daysBeforeExpiration, std::string _stapleName, float _staplePrice, unsigned int _stapleQuantity);
 
-   unsigned int numberOfDaysBeforeExpiration() const;
+   std::string  numberOfDaysBeforeExpiration() const;
    std::string  name() const;
    float        price() const;
    unsigned int quantity() const;
 
 /// protected members
 protected:
-   unsigned int _daysBeforeExpiration;
+   std::string  _daysBeforeExpiration;
    std::string  _stapleName;
    float        _staplePrice;
    unsigned int _stapleQuantity;
