@@ -2,14 +2,14 @@
 #include "Staple.h"
 
 Staple::Staple()
-   : _daysBeforeExpiration(0)
+   : _daysBeforeExpiration("")
    , _stapleName("")
    , _staplePrice(0.0)
    , _stapleQuantity(0)
 {
 }
 
-Staple::Staple(unsigned int _daysBeforeExpiration, std::string _stapleName, float _staplePrice, unsigned int _stapleQuantity)
+Staple::Staple(std::string _daysBeforeExpiration, std::string _stapleName, float _staplePrice, unsigned int _stapleQuantity)
     : _daysBeforeExpiration(_daysBeforeExpiration)
     , _stapleName(_stapleName)
     , _staplePrice(_staplePrice)
@@ -21,7 +21,7 @@ Staple::~Staple()
 {
 }
 
-unsigned int Staple::numberOfDaysBeforeExpiration() const
+std::string Staple::numberOfDaysBeforeExpiration() const
 {
    return _daysBeforeExpiration;
 }

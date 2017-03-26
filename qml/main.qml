@@ -2,6 +2,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick 2.7
 import QtQuick.Window 2.0
+import QtQuick.Controls.Material 2.0
 
 ApplicationWindow {
     id: window
@@ -13,20 +14,30 @@ ApplicationWindow {
     Rectangle {
         id : header
         width: parent.width
-        height: 200
-        border.width: 1
-        border.color: "lightgrey"
+        height: 300
+        // border.width: 1
+        // border.color: "lightgrey"
+        Material.elevation: 2
 
+        Image {
+            id: staplesImage
+            source: "qrc:/olive-oil.jpg"
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectCrop
+        }
+
+        /*
         Text {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.fill: parent
             text: "Staples"
             font.bold: true
-            font.pointSize: 20
+            font.pointSize: 25
             elide: Text.ElideMiddle
             color: "#212121"
         }
+        */
     }
 
     Rectangle {

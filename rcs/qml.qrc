@@ -4,5 +4,6 @@
         <file alias="qtquickcontrols2.conf">../conf/qtquickcontrols2.conf</file>
         <file alias="busy_dark.png">../rcs/busy_dark.png</file>
         <file alias="raw-food.svg">../rcs/raw-food.svg</file>
+        <file alias="olive-oil.jpg">../rcs/olive-oil.jpg</file>
     </qresource>
 </RCC>
