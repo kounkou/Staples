@@ -11,6 +11,8 @@ ApplicationWindow {
     height:Screen.height
     title: qsTr("Staples")
 
+    property real boxHeight : 150
+
     Rectangle {
         id : header
         width: parent.width
@@ -66,9 +68,37 @@ ApplicationWindow {
                 Component.onCompleted: {
                 }
 
+                states: State {
+                    name: "Details"
+                    PropertyChanges {
+                        target: box;
+                        height: boxHeight*2
+                    }
+                    PropertyChanges {
+                        target: stapleQuantity
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: stapleImage
+                        visible: false
+                    }
+                }
+
+                transitions: Transition {
+                    ParallelAnimation {
+                        NumberAnimation {
+                            duration: 300
+                            properties: "height"
+                        }
+                    }
+                }
+
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {}
+                    onClicked: {
+                        if   (box.state == "") { box.state = "Details" }
+                        else                   { box.state = "" }
+                    }
                 }
 
                 Label {
@@ -120,7 +150,7 @@ ApplicationWindow {
 
                     height: stapleImage.height/2
                     width: stapleImage.width/2
-                    color: quantity > 2 ? "#00c853" : "#dd2c00"
+                    color: quantity > 1 ? "#00c853" : "#dd2c00"
                     radius: stapleImage.height/4
 
                     anchors.right: stapleImage.left
@@ -134,11 +164,17 @@ ApplicationWindow {
                     id: stapleImage
                     anchors.right: box.right
                     anchors.rightMargin: 10
-                    width: box.height/2
-                    height: box.height/2
+                    width: 75
+                    height: 75
                     anchors.verticalCenter: box.verticalCenter
                     source: "qrc:/raw-food.svg"
                 }
+
+                /*
+                Rectangle { id: plusOne }
+                Rectangle { id: minusOne }
+                Rectangle { id: remove }
+                */
             }
         }
 
