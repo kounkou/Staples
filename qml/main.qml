@@ -89,6 +89,11 @@ ApplicationWindow {
                         NumberAnimation {
                             duration: 300
                             properties: "height"
+                            easing {
+                                type:  Easing.InOutQuart
+                                amplitude: 1.0
+                                period: 0.5
+                            }
                         }
                     }
                 }
