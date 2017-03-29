@@ -51,6 +51,7 @@ DISTFILES += \
     qml/Label.qml \
     qml/main.qml \
     qml/Menu.qml \
-    qml/Services.qml
+    qml/Services.qml \
+    README.md
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
