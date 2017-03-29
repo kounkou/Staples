@@ -24,16 +24,24 @@ protected:
    virtual void TearDown() {}
 };
 
-TEST_F(StaplesManager_Test, retrieveStaples)
+TEST_F(StaplesManager_Test, retrieveStaples_Wrong)
 {
-    QVariantMap map;
-    map.insert("integer", 1);
-    map.insert("double", 2.34);
-    map.insert("bool", QVariant(true));
-    map.insert("string", "word");
-    QJsonObject object = QJsonObject::fromVariantMap(map);
-    QJsonDocument doc;
-    doc.setObject(object);
+    QString data_faulty("{\"status\":\"nok\",\"data\": {\"staples\": {\"s1\" :{ \"exp\"  :"
+                        " \"Jan 28 2018\", \"name\" : \"BÃ©nÃ©dicta Mayo\", \"price\" : \"1.00\", \"qty\" : \"1\" }}}}");
+    QJsonDocument doc_faulty = QJsonDocument::fromJson(data_faulty.toUtf8());
 
-    EXPECT_EQ(1, stapleObj->retrieveStaples(doc));
+    /* This test will evaluate a syntaxically correct but wrong (from Staples POV) json document */
+    EXPECT_EQ(1, stapleObj->retrieveStaples(doc_faulty));
 }
+
+TEST_F(StaplesManager_Test, retrieveStaples_Right)
+{
+
+    QString data_spare("{\"status\":\"ok\",\"data\": {\"staples\": {\"s1\" :{ \"exp\"  :"
+                       " \"Jan 28 2018\", \"name\" : \"BÃ©nÃ©dicta Mayo\", \"price\" : \"1.00\", \"qty\" : \"1\" }}}}");
+    QJsonDocument doc_spare = QJsonDocument::fromJson(data_spare.toUtf8());
+
+    /* This test will evaluate a syntaxically correct but right (from Staples POV) json document */
+    EXPECT_EQ(0, stapleObj->retrieveStaples(doc_spare));
+}
+

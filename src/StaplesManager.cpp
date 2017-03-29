@@ -40,7 +40,7 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
          * This loop will iterate through the elements of the data
          * file, and staples inside the listview
          */
-        for (int ii = 1; ii < staples.size(); ++ii)
+        for (int ii = 1; ii <= staples.size(); ++ii)
         {
             QString ss = QString("s%1").arg(ii);
 

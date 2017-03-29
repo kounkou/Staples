@@ -5,12 +5,23 @@
     {
        "staples":
        {
-          "water"  :{ "exp"  : "20180501", "name" : "Vitel",    "price": "0.50" },
-          "Juice"  :{ "exp"  : "20170501", "name" : "Orangina", "price": "1.50" },          
-          "Desert" :{ "exp"  : "20170401", "name" : "YopLait",  "price": "2.50" },         
-          "Bread"  :{ "exp"  : "20170402", "name" : "LeBlanc",  "price": "1.50" },         
-          "Eggs"   :{ "exp"  : "20170404", "name" : "LOUE",     "price": "2.50" },         
-          "Milk"   :{ "exp"  : "20170401", "name" : "Lactel",   "price": "1.50" }         
-       }
-    }
-}
+          "s1" :{ "exp"  : "Jan 28 2018", "name" : "BÃ©nÃ©dicta Mayo", "price" : "1.00", "qty" : "1" },
+          "s2" :{ "exp"  : "Dec 31 2017", "name" : "Amora Moutarde", "price" : "1.00", "qty" : "1" },          
+          "s3" :{ "exp"  : "Oct 19 2019", "name" : "Bolognaise",     "price" : "1.00", "qty" : "1" },         
+          "s4" :{ "exp"  : "Jun 18 2018", "name" : "Cigalou Piment", "price" : "1.00", "qty" : "1" },         
+          "s5" :{ "exp"  : "Aug 26 2016", "name" : "Vinaigrette",    "price" : "2.50", "qty" : "1" },         
+          "s6" :{ "exp"  : "Jun 26 2017", "name" : "100% PUR JUS",   "price" : "1.50", "qty" : "2" },         
+          "s7" :{ "exp"  : "May 01 2018", "name" : "Ketchup",        "price" : "1.50", "qty" : "1" },        
+          "s8" :{ "exp"  : "May 01 2019", "name" : "Onion",          "price" : "1.50", "qty" : "17"},        
+          "s9" :{ "exp"  : "Apr 21 2018", "name" : "Cornichons",     "price" : "1.50", "qty" : "1" },        
+          "s10":{ "exp"  : "Apr 09 2017", "name" : "Pain Au Lait Pk","price" : "1.50", "qty" : "2" },        
+          "s11":{ "exp"  : "Apr 04 2017", "name" : "Pdt Butter",     "price" : "1.50", "qty" : "1" },        
+          "s12":{ "exp"  : "May 25 2017", "name" : "Leerdammer",     "price" : "1.50", "qty" : "2" },        
+          "s13":{ "exp"  : "Apr 15 2017", "name" : "Eggs",           "price" : "1.50", "qty" : "2" },        
+          "s14":{ "exp"  : "Jun 05 2017", "name" : "Rosette",        "price" : "1.50", "qty" : "1" },        
+          "s15":{ "exp"  : "May 05 2017", "name" : "Emmental",       "price" : "1.50", "qty" : "2" },        
+          "s16":{ "exp"  : "Apr 06 2017", "name" : "YopLait Panier", "price" : "1.50", "qty" : "6" },        
+          "s17":{ "exp"  : "Mar 25 2017", "name" : "Le blanc bread", "price" : "1.50", "qty" : "3" },        
+          "s18":{ "exp"  : "Mar 25 2019", "name" : "Evian",          "price" : "1.50", "qty" : "1" },        
+          "s19":{ "exp"  : "Aug 09 2017", "name" : "Lactel",         "price" : "1.50", "qty" : "2" },
+          "s20":{ "exp"  : "Dec 31 2018", "name" : "Garlic",         "price" : "2.30", "qty" : "1" }}}}
