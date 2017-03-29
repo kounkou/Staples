@@ -31,7 +31,7 @@ launch_server()
    while true
    do 
       information=`cat ${DATA_PATH}/data`
-      echo -e "HTTP/1.1 200 OK\n\n ${information}" | nc -l -p 1500 -q 1
+      echo -e "HTTP/1.1 200 OK\n\n ${information}" | nc -l -p 80 -q 1
    done
    echo 'Exit  : function launch_server()'
 }
