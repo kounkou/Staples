@@ -39,7 +39,7 @@ Staples application can be tested on your personal server for Staples
 1. You will first need to install as described in - How to install -.
 2. Once you have installed Staples application, you will need to fork Staples project from **[github](https://github.com/kounkou/Staples)**
 3. You will need to launch the server application as **root**
-`<addr>` bash weberser.sh
+`bash weberser.sh`
 4. Enjoy !
 
 # Contact
