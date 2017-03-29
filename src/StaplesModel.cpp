@@ -13,10 +13,18 @@ StaplesModel* StaplesModel::getInstance()
     return _pInstance;
 }
 
+/*
+ * addStaple will add a staple inside the container
+ * This function is made with insert
+ * instead and in place of push_back
+ * Using insert will garanty the object doesn't call
+ * the copy constructor again.
+ */
 void StaplesModel::addStaple(std::string expirationDate, std::string name, float price, unsigned int quantity)
 {
+    std::vector<Staple>::iterator it = _staplesContainer.begin();
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    _staplesContainer.push_back(Staple(expirationDate, name, price, quantity));
+    _staplesContainer.insert(it, Staple(expirationDate, name, price, quantity));
     endInsertRows();
 }
 
