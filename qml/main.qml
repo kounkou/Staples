@@ -25,19 +25,6 @@ ApplicationWindow {
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
         }
-
-        /*
-        Text {
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            anchors.fill: parent
-            text: "Staples"
-            font.bold: true
-            font.pointSize: 25
-            elide: Text.ElideMiddle
-            color: "#212121"
-        }
-        */
     }
 
     Rectangle {
@@ -175,11 +162,16 @@ ApplicationWindow {
                     source: "qrc:/raw-food.svg"
                 }
 
-                /*
-                Rectangle { id: plusOne }
-                Rectangle { id: minusOne }
-                Rectangle { id: remove }
-                */
+                Rectangle {
+                    color: "white"
+
+                    anchors.right: box.right
+                    anchors.top: box.bottom
+                    anchors.topMargin: -10
+                    width: 75
+                    height: 20
+                    z:2
+                }
             }
         }
 
