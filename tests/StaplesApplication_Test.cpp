@@ -32,12 +32,19 @@ TEST_F(StaplesApplication_Test, init)
 TEST_F(StaplesApplication_Test, retrieveListOfStaples)
 {
     stapleObj->init();
-    EXPECT_EQ(0, stapleObj->retrieveListOfStaples(QUrl("http://192.168.0.21:1500")));
+    EXPECT_EQ(0, stapleObj->retrieveListOfStaples(QUrl("http://127.0.0.1:1500")));
 }
 
-TEST_F(StaplesApplication_Test, onResult)
+TEST_F(StaplesApplication_Test, addStapleToServer)
 {
-    // QNetworkReply* rep = NULL;
-    // This interrupts the tests abruptly
-    // EXPECT_EQ(1, stapleObj->onResult(rep));
+    Staple s("Apr 2 2017", "Test", 5.80, 2);
+    stapleObj->init();
+    EXPECT_EQ(0, stapleObj->addStapleToServer(s));
+}
+
+TEST_F(StaplesApplication_Test, removeStapleFromServer)
+{
+    Staple s("Apr 2 2017", "Test", 5.80, 2);
+    stapleObj->init();
+    EXPECT_EQ(0, stapleObj->removeStapleFromServer(s));
 }

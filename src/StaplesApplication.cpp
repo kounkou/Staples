@@ -51,10 +51,15 @@ int StaplesApplication::init()
     return status;
 }
 
-int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
+/*
+ * This is a generic function created for all kinds of
+ * commands including :
+ * - retrieve list of staples
+ * - add a new staple
+ * - remove a staple
+ */
+int StaplesApplication::sendHttpRequest(const QUrl& url) const
 {
-    qDebug() << "retrieveServerApplicationIPAddress";
-
     int status = 1;
 
     if (!url.isEmpty())
@@ -70,6 +75,47 @@ int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
     }
 
     return status;
+}
+
+int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
+{
+    return sendHttpRequest(url);
+}
+
+/*
+ * This function will add staple to the
+ * remote server with the provided
+ * staple in parameter
+ */
+int StaplesApplication::addStapleToServer(const Staple& s) const
+{
+    QString str = QString("http://192.168.0.21/cgi-bin/example.cgi?")   +
+                  QString("val_x=")  + QString::fromStdString(s.numberOfDaysBeforeExpiration()) +
+                  QString("&val_y=") + QString::fromStdString(s.name()) +
+                  QString("&val_z=") + QString::number(s.price())       +
+                  QString("&val_t=") + QString::number(s.quantity())    +
+                  QString("&val_u=1");
+
+    qDebug() << str;
+    return sendHttpRequest(QUrl(str));
+}
+
+/*
+ * This function will remove a staple from the
+ * remote server with the provided
+ * staple in parameter
+ */
+int StaplesApplication::removeStapleFromServer(const Staple& s) const
+{
+    QString str = QString("http://192.168.0.21/cgi-bin/example.cgi?")   +
+                  QString("val_x=")  + QString::fromStdString(s.numberOfDaysBeforeExpiration()) +
+                  QString("&val_y=") + QString::fromStdString(s.name()) +
+                  QString("&val_z=") + QString::number(s.price())       +
+                  QString("&val_t=") + QString::number(s.quantity())    +
+                  QString("&val_u=3");
+
+    qDebug() << str;
+    return sendHttpRequest(QUrl(str));
 }
 
 /*

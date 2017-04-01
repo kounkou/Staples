@@ -23,16 +23,20 @@ class StaplesApplication : public QObject
 {
     Q_OBJECT
 
-/// public methods
 public:
    explicit StaplesApplication(QObject *parent = 0);
    virtual ~StaplesApplication();
 
    int  init();
-   int  retrieveListOfStaples(const QUrl& url) const;
+   int  retrieveListOfStaples(const QUrl& url)  const;
+   int  addStapleToServer(const Staple& s)      const;
+   int  removeStapleFromServer(const Staple& s) const;
    void initUserInterface();
 
-public slots:
+private:
+   int  sendHttpRequest(const QUrl& url) const;
+
+private slots:
     int onResult(QNetworkReply* rep);
 
 /// protected members

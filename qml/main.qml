@@ -25,19 +25,6 @@ ApplicationWindow {
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
         }
-
-        /*
-        Text {
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            anchors.fill: parent
-            text: "Staples"
-            font.bold: true
-            font.pointSize: 25
-            elide: Text.ElideMiddle
-            color: "#212121"
-        }
-        */
     }
 
     Rectangle {
@@ -121,7 +108,7 @@ ApplicationWindow {
                 Label {
                     id: staplePrice
                     font.pointSize: 13
-                    text: "Product costs €" + Math.round(price * 100) / 100
+                    text: qsTr("Product costs €") + Math.round(price * 100) / 100
                     color: "#424242"
                     anchors.left        : box.left
                     anchors.leftMargin  : 10
@@ -133,8 +120,8 @@ ApplicationWindow {
                     id: stapleExpirationDate
                     font.pointSize: 13
                     wrapMode: Text.WordWrap
-                    text: "This product will expire on " + numberOfDaysBeforeExpiration +
-                          "<br> according to Staples calculations."
+                    text: qsTr("This product will expire on ") + numberOfDaysBeforeExpiration +
+                          qsTr("<br> according to Staples calculations.")
                     color: "#9e9e9e"
                     anchors.left        : box.left
                     anchors.leftMargin  : 10
@@ -175,11 +162,16 @@ ApplicationWindow {
                     source: "qrc:/raw-food.svg"
                 }
 
-                /*
-                Rectangle { id: plusOne }
-                Rectangle { id: minusOne }
-                Rectangle { id: remove }
-                */
+                Rectangle {
+                    color: "white"
+
+                    anchors.right: box.right
+                    anchors.top: box.bottom
+                    anchors.topMargin: -10
+                    width: 75
+                    height: 20
+                    z:2
+                }
             }
         }
 
