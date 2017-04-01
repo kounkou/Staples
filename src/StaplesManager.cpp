@@ -55,3 +55,32 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
 
     return status;
 }
+
+/*
+ * The authentificate method will identify the user of the
+ * application. If you're already known, then we skip to
+ * run the application, else we request for an ID
+ */
+int StaplesManager::authentificates(const QJsonDocument& doc)
+{
+    int status = 1;
+
+    QJsonObject jsonObj = doc.object();
+
+    // accessing the singleton
+    StaplesModel* _model = StaplesModel::getInstance();
+
+    if (jsonObj.value(QString("status")) != "ok")
+    {
+
+        status = 1;
+    }
+    else
+    {
+        qDebug() << "status is ok";
+
+        status = 0;
+    }
+
+    return status;
+}

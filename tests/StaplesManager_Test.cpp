@@ -36,7 +36,6 @@ TEST_F(StaplesManager_Test, retrieveStaples_Wrong)
 
 TEST_F(StaplesManager_Test, retrieveStaples_Right)
 {
-
     QString data_spare("{\"status\":\"ok\",\"data\": {\"staples\": {\"s1\" :{ \"exp\"  :"
                        " \"Jan 28 2018\", \"name\" : \"BÃ©nÃ©dicta Mayo\", \"price\" : \"1.00\", \"qty\" : \"1\" }}}}");
     QJsonDocument doc_spare = QJsonDocument::fromJson(data_spare.toUtf8());
@@ -45,3 +44,11 @@ TEST_F(StaplesManager_Test, retrieveStaples_Right)
     EXPECT_EQ(0, stapleObj->retrieveStaples(doc_spare));
 }
 
+TEST_F(StaplesManager_Test, authentificate)
+{
+    QString data_auth("{\"status\":\"ok\",\"data\": {\"staples\": {\"s1\" :{ \"exp\"  :"
+                       " \"Jan 28 2018\", \"name\" : \"BÃ©nÃ©dicta Mayo\", \"price\" : \"1.00\", \"qty\" : \"1\" }}}}");
+    QJsonDocument doc_auth = QJsonDocument::fromJson(data_auth.toUtf8());
+
+    EXPECT_EQ(0, stapleObj->authentificates(doc_auth));
+}

@@ -16,6 +16,7 @@ public:
    ~StaplesManager();
 
     int retrieveStaples(const QJsonDocument& doc);
+    int authentificates(const QJsonDocument& doc);
 };
 
 #endif
