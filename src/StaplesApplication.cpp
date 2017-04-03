@@ -34,10 +34,12 @@ int StaplesApplication::init()
     // starting services
     _networkObj     = _objFactory.get(_networkObj);
     _staplesManager = _objFactory.get(_staplesManager);
+    _timer          = new QTimer(this);
 
     if (_networkObj != NULL && _staplesManager != NULL)
     {
        QObject::connect(_networkObj, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
+       QObject::connect(_timer,      SIGNAL(timeout()),                this, SLOT(retrieveAllStaples()));
        status = 0;
     }
     else
@@ -46,9 +48,16 @@ int StaplesApplication::init()
     }
 
     // fake request
-    retrieveListOfStaples(QUrl("http://192.168.0.21/cgi-bin/example.cgi?val_x=Jun%2025%202018&val_y=Morora&val_z=5.97&val_t=1&val_u=2"));
+    // retrieveListOfStaples(QUrl("http://192.168.0.21/cgi-bin/example.cgi?val_x=Jun%2025%202018&val_y=Morora&val_z=5.97&val_t=1&val_u=2"));
+
+    _timer->start(10000);
 
     return status;
+}
+
+void StaplesApplication::retrieveAllStaples()
+{
+    retrieveListOfStaples(QUrl("http://192.168.0.21/cgi-bin/example.cgi?val_x=Jun%2025%202018&val_y=Morora&val_z=5.97&val_t=1&val_u=2"));
 }
 
 /*

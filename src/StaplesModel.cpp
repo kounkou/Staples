@@ -13,6 +13,10 @@ StaplesModel* StaplesModel::getInstance()
     return _pInstance;
 }
 
+void StaplesModel::clearListOfStaples()
+{
+}
+
 /*
  * addStaple will add a staple inside the container
  * This function is made with insert

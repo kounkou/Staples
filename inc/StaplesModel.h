@@ -28,7 +28,8 @@ public:
   ~StaplesModel();
 
    static StaplesModel* getInstance();
-   int staplesContainerSize() const;
+   int    staplesContainerSize() const;
+   void   clearListOfStaples();
 
    int      rowCount(const QModelIndex& parent = QModelIndex())        const;
    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;

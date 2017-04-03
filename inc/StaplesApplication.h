@@ -18,6 +18,7 @@
 #include "StaplesManager.h"
 #include <QQuickView>
 #include "StaplesModel.h"
+#include <QTimer>
 
 class StaplesApplication : public QObject
 {
@@ -37,7 +38,8 @@ private:
    int  sendHttpRequest(const QUrl& url) const;
 
 private slots:
-    int onResult(QNetworkReply* rep);
+    int  onResult(QNetworkReply* rep);
+    void retrieveAllStaples();
 
 /// protected members
 private:
@@ -46,6 +48,7 @@ private:
    StaplesManager*        _staplesManager;
    StaplesModel*          _model;
    QQuickView*            _view;
+   QTimer*                _timer;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_

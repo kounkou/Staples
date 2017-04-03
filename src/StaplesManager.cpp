@@ -36,6 +36,9 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
         QVariantMap dataMap    = staplesMap["data"].toMap();
         QVariantMap staples    = dataMap["staples"].toMap();
 
+        // clear the list before it's appent with garbage
+        _model->clearListOfStaples();
+
         /*
          * This loop will iterate through the elements of the data
          * file, and staples inside the listview
