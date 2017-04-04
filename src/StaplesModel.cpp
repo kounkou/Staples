@@ -15,6 +15,14 @@ StaplesModel* StaplesModel::getInstance()
 
 void StaplesModel::clearListOfStaples()
 {
+    beginRemoveRows(QModelIndex(), 0, rowCount());
+    for (int row = 0; row < rowCount(); ++row)
+    {
+        _staplesContainer.removeAt(row);
+        _staplesContainer.erase(_staplesContainer.begin(),
+                                _staplesContainer.end());
+    }
+    endRemoveRows();
 }
 
 /*
@@ -26,25 +34,21 @@ void StaplesModel::clearListOfStaples()
  */
 void StaplesModel::addStaple(std::string expirationDate, std::string name, float price, unsigned int quantity)
 {
-    std::vector<Staple>::iterator it = _staplesContainer.begin();
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    _staplesContainer.insert(it, Staple(expirationDate, name, price, quantity));
+    _staplesContainer.insert(0, Staple(expirationDate, name, price, quantity));
+    qDebug() << "new staples size : " << _staplesContainer.count();
     endInsertRows();
 }
 
 StaplesModel::StaplesModel(QObject *parent)
     : QAbstractListModel(parent)
-    , _staplesContainer(std::vector<Staple>())
-{
-}
-
-StaplesModel::~StaplesModel()
+    , _staplesContainer(QList<Staple>())
 {
 }
 
 int StaplesModel::staplesContainerSize() const
 {
-    return _staplesContainer.size();
+    return _staplesContainer.count();
 }
 
 QHash<int, QByteArray> StaplesModel::roleNames() const
@@ -61,14 +65,14 @@ QHash<int, QByteArray> StaplesModel::roleNames() const
 
 int StaplesModel::rowCount(const QModelIndex &) const
 {
-    return _staplesContainer.size();
+    return _staplesContainer.count();
 }
 
 QVariant StaplesModel::data(const QModelIndex &index, int role) const
 {
     const Staple& staple = _staplesContainer[index.row()];
 
-    if (index.row() < 0 || index.row() > _staplesContainer.size())
+    if (index.row() < 0 || index.row() > _staplesContainer.count())
     {
         return QVariant();
     }
@@ -81,4 +85,6 @@ QVariant StaplesModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-
+StaplesModel::~StaplesModel()
+{
+}

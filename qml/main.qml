@@ -85,6 +85,19 @@ ApplicationWindow {
                     }
                 }
 
+                ListView.onAdd: SequentialAnimation {
+                    PropertyAction { target:  box; property: "height"; value: 0 }
+                    NumberAnimation { target: box; property: "height"; to: 150; duration: 250; easing.type: Easing.InOutQuad }
+                }
+
+                ListView.onRemove: SequentialAnimation {
+                    PropertyAction { target: box;  property: "ListView.delayRemove"; value: true }
+                    NumberAnimation { target: box; property: "height"; to: 0; duration: 250; easing.type: Easing.InOutQuad }
+
+                    // Make sure delayRemove is set back to false so that the item can be destroyed
+                    PropertyAction { target: box; property: "ListView.delayRemove"; value: false }
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
