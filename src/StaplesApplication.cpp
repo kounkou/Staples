@@ -47,10 +47,7 @@ int StaplesApplication::init()
         status = 1;
     }
 
-    // fake request
-    retrieveListOfStaples(QUrl("http://192.168.0.21/cgi-bin/example.cgi?val_x=Jun%2025%202018&val_y=Morora&val_z=5.97&val_t=1&val_u=2"));
-
-    _timer->start(10000);
+    QMetaObject::invokeMethod(_timer, "timeout");
 
     return status;
 }
@@ -86,6 +83,10 @@ int StaplesApplication::sendHttpRequest(const QUrl& url) const
     return status;
 }
 
+/*
+ * This method will call the httpRequest to
+ * update the list of staples
+ */
 int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
 {
     return sendHttpRequest(url);
