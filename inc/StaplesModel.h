@@ -33,9 +33,10 @@ public:
    void   clearListOfStaples();
 
    int      rowCount(const QModelIndex& parent = QModelIndex())        const;
-   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
 protected:
+   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+
    QHash<int, QByteArray> roleNames() const;
    QHash<int, QByteArray> roleIds()   const;
 
