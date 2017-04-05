@@ -52,23 +52,11 @@ ApplicationWindow {
                 anchors.rightMargin : 20
                 anchors.bottomMargin: 20
 
-                Component.onCompleted: {
-                }
-
                 states: State {
                     name: "Details"
-                    PropertyChanges {
-                        target: box;
-                        height: boxHeight*2
-                    }
-                    PropertyChanges {
-                        target: stapleQuantity
-                        visible: false
-                    }
-                    PropertyChanges {
-                        target: stapleImage
-                        visible: false
-                    }
+                    PropertyChanges { target: box;            height: boxHeight*2 }
+                    PropertyChanges { target: stapleQuantity; visible: true }
+                    PropertyChanges { target: stapleImage;    visible: true }
                 }
 
                 transitions: Transition {
@@ -86,16 +74,25 @@ ApplicationWindow {
                 }
 
                 ListView.onAdd: SequentialAnimation {
-                    PropertyAction { target:  box; property: "height"; value: 0 }
+                    PropertyAction  { target:  box; property: "height"; value: 0 }
                     NumberAnimation { target: box; property: "height"; to: 150; duration: 250; easing.type: Easing.InOutQuad }
                 }
-
                 ListView.onRemove: SequentialAnimation {
-                    PropertyAction { target: box;  property: "ListView.delayRemove"; value: true }
+                    PropertyAction  { target: box;  property: "ListView.delayRemove"; value: true }
                     NumberAnimation { target: box; property: "height"; to: 0; duration: 250; easing.type: Easing.InOutQuad }
 
                     // Make sure delayRemove is set back to false so that the item can be destroyed
                     PropertyAction { target: box; property: "ListView.delayRemove"; value: false }
+                }
+
+                Behavior on height
+                {
+                    NumberAnimation
+                    {
+                        property   : "height";
+                        duration   : 300;
+                        easing.type: Easing.OutBack
+                    }
                 }
 
                 MouseArea {
@@ -173,17 +170,6 @@ ApplicationWindow {
                     height: 75
                     anchors.verticalCenter: box.verticalCenter
                     source: "qrc:/raw-food.svg"
-                }
-
-                Rectangle {
-                    color: "white"
-
-                    anchors.right: box.right
-                    anchors.top: box.bottom
-                    anchors.topMargin: -10
-                    width: 75
-                    height: 20
-                    z:2
                 }
             }
         }
