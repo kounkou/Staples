@@ -24,7 +24,6 @@ script:
 - sudo cp *.a /usr/lib
 - cd ${WORKDIR}
 - chmod +x ./scripts/dependencies.sh ./scripts/build.sh ./scripts/qt-5.7 ./scripts/extract-qt-installer ./scripts/get_code_cov.sh ./scripts/webserver.sh
-- ./scripts/webserver.sh & 
 - ./scripts/dependencies.sh
 - source ./scripts/qt-5.7.env
 - ./scripts/build.sh

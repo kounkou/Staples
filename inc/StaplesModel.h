@@ -4,6 +4,7 @@
 
 #include <QAbstractListModel>
 #include <QObject>
+#include <QDebug>
 #include "Staple.h"
 
 enum StaplesRoles
@@ -14,7 +15,7 @@ enum StaplesRoles
    QuantityRole       = Qt::UserRole + 4
 };
 
-class StaplesModel : public QAbstractListModel 
+class StaplesModel : public QAbstractListModel
 {
    Q_OBJECT
 
@@ -28,17 +29,19 @@ public:
   ~StaplesModel();
 
    static StaplesModel* getInstance();
-   int staplesContainerSize() const;
+   int    staplesContainerSize() const;
+   void   clearListOfStaples();
 
    int      rowCount(const QModelIndex& parent = QModelIndex())        const;
-   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-   
+
 protected:
+   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+
    QHash<int, QByteArray> roleNames() const;
    QHash<int, QByteArray> roleIds()   const;
 
 private:
-   std::vector<Staple>  _staplesContainer;
+   QList<Staple>  _staplesContainer;
    static StaplesModel* _pInstance;
 };
 

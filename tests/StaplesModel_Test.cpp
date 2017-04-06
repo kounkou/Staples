@@ -34,18 +34,20 @@ TEST_F(StaplesModel_Test, staplesContainerSize)
     EXPECT_EQ(0, stapleObj->staplesContainerSize());
 }
 
-TEST_F(StaplesModel_Test, data)
-{
-    QModelIndex index;
-    QVariant var = stapleObj->data(index, NameRole);
-
-    EXPECT_EQ(true,  var != "");
-}
-
 TEST_F(StaplesModel_Test, addStaple)
 {
     stapleObj->addStaple("Jan 01 2017", "Test Model", 0.78, 3);
     stapleObj->addStaple("Jan 01 2017", "Test Model", 0.78, 3);
 
     EXPECT_EQ(2, stapleObj->staplesContainerSize());
+}
+
+TEST_F(StaplesModel_Test, clearListOfStaples)
+{
+    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
+    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
+
+    EXPECT_EQ(2, stapleObj->staplesContainerSize());
+    stapleObj->clearListOfStaples();
+    EXPECT_EQ(0, stapleObj->staplesContainerSize());
 }

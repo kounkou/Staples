@@ -24,6 +24,8 @@ protected:
    virtual void TearDown() {}
 };
 
+// Nominal cases
+
 TEST_F(StaplesApplication_Test, init)
 {
     EXPECT_EQ(0, stapleObj->init());
@@ -47,4 +49,13 @@ TEST_F(StaplesApplication_Test, removeStapleFromServer)
     Staple s("Apr 2 2017", "Test", 5.80, 2);
     stapleObj->init();
     EXPECT_EQ(0, stapleObj->removeStapleFromServer(s));
+}
+
+
+// Non Nominal cases
+
+TEST_F(StaplesApplication_Test, sendHttpRequest)
+{
+    stapleObj->init();
+    EXPECT_EQ(1, stapleObj->retrieveListOfStaples(QUrl("")));
 }
