@@ -22,7 +22,7 @@ class StaplesModel : public QAbstractListModel
 public slots:
    void addStaple(std::string  expirationDate,
                   std::string  name,
-                  float        price,
+                  double       price,
                   unsigned int quantity);
 public:
    StaplesModel(QObject* parent = 0);
@@ -31,6 +31,7 @@ public:
    static StaplesModel* getInstance();
    int    staplesContainerSize() const;
    void   clearListOfStaples();
+   int    displayListOfStaples() const;
 
    int      rowCount(const QModelIndex& parent = QModelIndex())        const;
 

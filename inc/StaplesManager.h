@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QDebug>
 #include <QJsonArray>
+#include <QJsonValue>
 #include "StaplesModel.h"
 
 class StaplesManager
