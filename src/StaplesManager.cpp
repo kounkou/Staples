@@ -3,6 +3,8 @@
 #include "StaplesModel.h"
 #include <sstream>
 
+#include <QFile>
+
 StaplesManager::StaplesManager()
 {
 }
@@ -32,26 +34,24 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
     {
         qDebug() << "status is ok";
 
-        QVariantMap staplesMap = jsonObj.toVariantMap();
-        QVariantMap dataMap    = staplesMap["data"].toMap();
-        QVariantMap staples    = dataMap["staples"].toMap();
-
         // clear the list before it's appent with garbage
         _model->clearListOfStaples();
 
-        /*
-         * This loop will iterate through the elements of the data
-         * file, and staples inside the listview
-         */
-        for (int ii = 1; ii <= staples.size(); ++ii)
-        {
-            QString ss = QString("s%1").arg(ii);
+        QJsonValue  agentsArrayValue = jsonObj.value("staples");
+        QJsonArray  agentsArray      = agentsArrayValue.toArray();
 
-            _model->addStaple((staples[ss].toMap())["exp"].toString().toStdString(),
-                              (staples[ss].toMap())["name"].toString().toStdString(),
-                              (staples[ss].toMap())["price"].toFloat(),
-                              (staples[ss].toMap())["qty"].toInt());
+        foreach (const QJsonValue & v, agentsArray)
+        {
+            qDebug() << v.toObject().value("name").toString();
+
+            _model->addStaple(v.toObject().value("exp").toString().toStdString(),
+                              v.toObject().value("name").toString().toStdString(),
+                              v.toObject().value("price").toDouble(),
+                              v.toObject().value("qty").toInt());
         }
+
+        qDebug() << "finished reading the json file";
+        _model->displayListOfStaples();
 
         status = 0;
     }

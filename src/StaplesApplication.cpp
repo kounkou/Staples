@@ -47,6 +47,9 @@ int StaplesApplication::init()
         status = 1;
     }
 
+    // To be used for tests only
+    // _timer->start(10000);
+
     QMetaObject::invokeMethod(_timer, "timeout");
 
     return status;
@@ -54,7 +57,7 @@ int StaplesApplication::init()
 
 void StaplesApplication::retrieveAllStaples()
 {
-    retrieveListOfStaples(QUrl("http://192.168.0.21/cgi-bin/example.cgi?val_x=Jun%2025%202018&val_y=Morora&val_z=5.97&val_t=1&val_u=2"));
+    retrieveListOfStaples(QUrl("http://192.168.0.21:8080"));
 }
 
 /*
