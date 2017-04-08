@@ -9,7 +9,7 @@ Staple::Staple()
 {
 }
 
-Staple::Staple(std::string _daysBeforeExpiration, std::string _stapleName, float _staplePrice, unsigned int _stapleQuantity)
+Staple::Staple(std::string _daysBeforeExpiration, std::string _stapleName, double _staplePrice, unsigned int _stapleQuantity)
     : _daysBeforeExpiration(_daysBeforeExpiration)
     , _stapleName(_stapleName)
     , _staplePrice(_staplePrice)
@@ -31,7 +31,7 @@ std::string  Staple::name() const
    return _stapleName;
 }
 
-float Staple::price() const
+double Staple::price() const
 {
    return _staplePrice; 
 }

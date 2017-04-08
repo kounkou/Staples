@@ -1,48 +1,65 @@
 #!/bin/bash
-#---------------------------------
-#
-# FILE : webserver.sh  
-#
-# DESCRITION :
-# webserver script is a server side application
-# The server application will send the 
-# Json data to the client application
-#
-#---------------------------------
 
-USAGE="Usage : command"
-DATA_PATH="/tmp/"
+# echo "Content-type: text/html"
+echo "Content-type: application/json"
+echo ""
 
-# generate_data function
-generate_data()
-{
-   echo 'Enter : function generate_data()'
-   if [ ! -f ${DATA_PATH}/data ]
-   then
-      cp -rf data /tmp/
-   fi
-   echo 'Exit  : function generate_data()'
-}
+# Make sure we have been invoked properly.
 
-# launch_server function
-launch_server()
-{
-   echo 'Enter : function launch_server()'
-   while true
-   do 
-      information=`cat ${DATA_PATH}/data`
-      echo -e "HTTP/1.1 200 OK\n\n ${information}" | nc -l -p 80 -q 1
-   done
-   echo 'Exit  : function launch_server()'
-}
-
-if [ $# != 0 ]
-then
-   echo $USAGE
+if [ "$REQUEST_METHOD" != "GET" ]; then
+   echo "<hr>Script Error:"\
+        "<br>Usage error, cannot complete request, REQUEST_METHOD!=GET."\
+        "<br>Check your FORM declaration and be sure to use METHOD=\"GET\".<hr>"
    exit 1
 fi
 
-#---------------------------------
-generate_data
-launch_server
+# If no search arguments, exit gracefully now.
+
+if [ -z "$QUERY_STRING" ]; then
+   exit 0
+else
+   # No looping this time, just extract the data you are looking for with sed:
+   DATE=`echo   "$QUERY_STRING" | sed -n 's/^.*val_x=\([^&]*\).*$/\1/p' | sed "s/%20/ /g"`
+   NAME=`echo   "$QUERY_STRING" | sed -n 's/^.*val_y=\([^&]*\).*$/\1/p' | sed "s/%20/ /g"`
+   PRICE=`echo  "$QUERY_STRING" | sed -n 's/^.*val_z=\([^&]*\).*$/\1/p' | sed "s/%20/ /g"`
+   QTY=`echo    "$QUERY_STRING" | sed -n 's/^.*val_t=\([^&]*\).*$/\1/p' | sed "s/%20/ /g"`
+   ACTION=`echo "$QUERY_STRING" | sed -n 's/^.*val_u=\([^&]*\).*$/\1/p' | sed "s/%20/ /g"`
+
+   if [ "$ACTION" = "1" ]; then
+      # add a staple
+      # 1. find the number of elements
+      NB=`grep -o 'exp' /tmp/data | wc -l`
+      # 2. write the new element
+      prepareForAdd=$(cat /tmp/data | sed 's/}}}}/},/')
+      strToAdd=$(echo \""s$((${NB} + 1))"\" :{ \"exp\" : \"$DATE\", \"name\" : \"$NAME\", \"price\" : \"$PRICE\", \"qty\" : \"$QTY\" }}}})
+      # print the json file 
+      resultant="$prepareForAdd $strToAdd"
+      echo $resultant   
+
+      echo "" > /tmp/data
+      echo $resultant > /tmp/data
+
+      # clear
+      NB=0
+      prepareForAdd=""
+      resultant=""
+
+      # echo $NB
+      # echo "DATE : $DATE"
+      # echo "NAME : $NAME"
+      # echo "PRIX : $PRICE"
+      # echo "QTTY : $QTY"
+   elif [ "$ACTION" = "2" ]; then
+      # This is the old way of giving back the json to the client
+      # cat /tmp/data
+
+      # Here is the way I am wanting to do it
+      # jsonifier("use staples_database; select * from staples_root") > /tmp/data.json 
+      # cat /tmp/data.json
+   elif [ "$ACTION" = "3" ]; then
+      echo "Delete function is WIP"
+   fi
+fi
+
+exit 0
 

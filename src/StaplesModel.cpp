@@ -13,6 +13,27 @@ StaplesModel* StaplesModel::getInstance()
     return _pInstance;
 }
 
+int StaplesModel::displayListOfStaples() const
+{
+    int status = 1;
+    QList<Staple>::const_iterator it  = _staplesContainer.begin();
+
+    if (it == _staplesContainer.end())
+    {
+        status = 1;
+    }
+    else
+    {
+        status = 0;
+        for (; it != _staplesContainer.end(); ++it)
+        {
+            qDebug() << "Staples list contains : " << QString::fromStdString((*it).name());
+        }
+    }
+
+    return status;
+}
+
 void StaplesModel::clearListOfStaples()
 {
     beginRemoveRows(QModelIndex(), 0, rowCount());
@@ -32,7 +53,7 @@ void StaplesModel::clearListOfStaples()
  * Using insert will garanty the object doesn't call
  * the copy constructor again.
  */
-void StaplesModel::addStaple(std::string expirationDate, std::string name, float price, unsigned int quantity)
+void StaplesModel::addStaple(std::string expirationDate, std::string name, double price, unsigned int quantity)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     _staplesContainer.insert(0, Staple(expirationDate, name, price, quantity));
