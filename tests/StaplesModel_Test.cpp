@@ -51,3 +51,12 @@ TEST_F(StaplesModel_Test, clearListOfStaples)
     stapleObj->clearListOfStaples();
     EXPECT_EQ(0, stapleObj->staplesContainerSize());
 }
+
+TEST_F(StaplesModel_Test, displayListOfStaples)
+{
+    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
+    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
+    EXPECT_EQ(0, stapleObj->displayListOfStaples());
+    stapleObj->clearListOfStaples();
+    EXPECT_EQ(1, stapleObj->displayListOfStaples());
+}
