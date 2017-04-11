@@ -11,6 +11,8 @@ ApplicationWindow {
     height:Screen.height
     title: qsTr("Staples")
 
+    signal refresh()
+
     property real boxHeight : 150
 
     Rectangle {
@@ -181,6 +183,12 @@ ApplicationWindow {
             delegate: contactDelegate
             spacing: -1
             focus: true
+
+            // refresh the list of pull
+            onDragEnded: {
+                console.log("refreshing the list of staples...")
+                refresh()
+            }
         }
     }
 }
