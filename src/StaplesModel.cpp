@@ -53,7 +53,7 @@ void StaplesModel::clearListOfStaples()
  * Using insert will garanty the object doesn't call
  * the copy constructor again.
  */
-void StaplesModel::addStaple(std::string expirationDate, std::string name, double price, unsigned int quantity)
+void StaplesModel::addStaple(QDate expirationDate, std::string name, double price, unsigned int quantity)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     _staplesContainer.insert(0, Staple(expirationDate, name, price, quantity));
@@ -77,7 +77,7 @@ QHash<int, QByteArray> StaplesModel::roleNames() const
     QHash<int, QByteArray> roles;
 
     roles[NameRole]           = "name";
-    roles[ExpirationDateRole] = "numberOfDaysBeforeExpiration";
+    roles[ExpirationDateRole] = "expirationDate";
     roles[PriceRole]          = "price";
     roles[QuantityRole]       = "quantity";
 
@@ -99,7 +99,7 @@ QVariant StaplesModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == NameRole)           { return QString::fromStdString(staple.name()); }
-    if (role == ExpirationDateRole) { return QString::fromStdString(staple.numberOfDaysBeforeExpiration()); }
+    if (role == ExpirationDateRole) { return staple.expirationDate().toString(); }
     if (role == PriceRole)          { return staple.price(); }
     if (role == QuantityRole)       { return staple.quantity(); }
 

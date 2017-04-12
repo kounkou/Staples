@@ -44,7 +44,9 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
         {
             qDebug() << v.toObject().value("name").toString();
 
-            _model->addStaple(v.toObject().value("exp").toString().toStdString(),
+            QDate d;
+
+            _model->addStaple(d.fromString(v.toObject().value("exp").toString()),
                               v.toObject().value("name").toString().toStdString(),
                               v.toObject().value("price").toDouble(),
                               v.toObject().value("qty").toInt());
