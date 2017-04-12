@@ -13,6 +13,8 @@ ApplicationWindow {
 
     signal refresh()
 
+    property string dateTimeString: "Tue 2013-09-17 10:56:06"
+
     property real boxHeight : 150
 
     Rectangle {
@@ -132,7 +134,7 @@ ApplicationWindow {
                     id: stapleExpirationDate
                     font.pointSize: 13
                     wrapMode: Text.WordWrap
-                    text: qsTr("This product will expire on ") + numberOfDaysBeforeExpiration +
+                    text: qsTr("This product will expire on ") + Date(expirationDate) +
                           qsTr("<br> according to Staples calculations.")
                     color: "#9e9e9e"
                     anchors.left        : box.left
