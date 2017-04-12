@@ -20,7 +20,7 @@ class StaplesModel : public QAbstractListModel
    Q_OBJECT
 
 public slots:
-   void addStaple(std::string  expirationDate,
+   void addStaple(QDate        expirationDate,
                   std::string  name,
                   double       price,
                   unsigned int quantity);
