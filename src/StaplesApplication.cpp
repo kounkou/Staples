@@ -104,7 +104,7 @@ int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
  */
 int StaplesApplication::addStapleToServer(const Staple& s) const
 {
-    QString str = "";
+    QString str = "http://192.168.0.21:8080";
     qDebug() << str;
     return sendHttpRequest(QUrl(str));
 }
@@ -116,7 +116,7 @@ int StaplesApplication::addStapleToServer(const Staple& s) const
  */
 int StaplesApplication::removeStapleFromServer(const Staple& s) const
 {
-    QString str = "";
+    QString str = "http://192.168.0.21:8080";
     qDebug() << str;
     return sendHttpRequest(QUrl(str));
 }
