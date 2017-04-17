@@ -11,11 +11,8 @@ ApplicationWindow {
     height:Screen.height
     title: qsTr("Staples")
 
-    signal refresh()
-
-    property string dateTimeString: "Tue 2013-09-17 10:56:06"
-
-    property real boxHeight : 150
+    signal          refresh()
+    property real   boxHeight      : 150
 
     Rectangle {
         id : header
@@ -104,6 +101,8 @@ ApplicationWindow {
                     onClicked: {
                         if   (box.state == "") { box.state = "Details" }
                         else                   { box.state = "" }
+
+                        // console.log(expirationDate.toString())
                     }
                 }
 
@@ -132,9 +131,13 @@ ApplicationWindow {
 
                 Label {
                     id: stapleExpirationDate
+
+                    property date   expDate        : new Date(expirationDate)
+                    property string dateTimeString : expDate.toLocaleDateString()
+
                     font.pointSize: 13
                     wrapMode: Text.WordWrap
-                    text: qsTr("This product will expire on ") + Date(expirationDate) +
+                    text: qsTr("This product will expire on <br>") + Date.fromLocaleDateString(dateTimeString) +
                           qsTr("<br> according to Staples calculations.")
                     color: "#9e9e9e"
                     anchors.left        : box.left
