@@ -12,7 +12,7 @@ ApplicationWindow {
     title: qsTr("Staples")
 
     signal          refresh()
-    property real   boxHeight      : 150
+    property real   boxHeight      : 180
 
     Rectangle {
         id : header
@@ -43,7 +43,7 @@ ApplicationWindow {
 
             Rectangle {
                 id: box
-                height:150
+                height:boxHeight
                 width: parent.width
                 color: "white"
                 border.width: 1
@@ -76,7 +76,7 @@ ApplicationWindow {
 
                 ListView.onAdd: SequentialAnimation {
                     PropertyAction  { target:  box; property: "height"; value: 0 }
-                    NumberAnimation { target: box; property: "height"; to: 150; duration: 250; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: box; property: "height"; to: boxHeight; duration: 250; easing.type: Easing.InOutQuad }
                 }
                 ListView.onRemove: SequentialAnimation {
                     PropertyAction  { target: box;  property: "ListView.delayRemove"; value: true }
