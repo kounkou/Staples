@@ -34,6 +34,13 @@ int StaplesModel::displayListOfStaples() const
     return status;
 }
 
+/*
+ * clearing list of staples implies
+ * more than just removing the elements for the container.
+ * In reality, this implies also sending
+ * signals to the view (qml)
+ * This is done using the bening and EndRemovingRows
+ */
 void StaplesModel::clearListOfStaples()
 {
     beginRemoveRows(QModelIndex(), 0, rowCount());
@@ -53,7 +60,7 @@ void StaplesModel::clearListOfStaples()
  * Using insert will garanty the object doesn't call
  * the copy constructor again.
  */
-void StaplesModel::addStaple(QDate expirationDate, std::string name, double price, unsigned int quantity)
+void StaplesModel::addStaple(QDateTime expirationDate, std::string name, double price, unsigned int quantity)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     _staplesContainer.insert(0, Staple(expirationDate, name, price, quantity));

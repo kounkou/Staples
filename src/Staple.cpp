@@ -2,14 +2,14 @@
 #include "Staple.h"
 
 Staple::Staple()
-   : _expDate(QDate())
+   : _expDate(QDateTime())
    , _stapleName("")
    , _staplePrice(0.0)
    , _stapleQuantity(0)
 {
 }
 
-Staple::Staple(QDate _expirationDate, std::string _stapleName, double _staplePrice, unsigned int _stapleQuantity)
+Staple::Staple(QDateTime _expirationDate, std::string _stapleName, double _staplePrice, unsigned int _stapleQuantity)
     : _expDate(_expirationDate)
     , _stapleName(_stapleName)
     , _staplePrice(_staplePrice)
@@ -21,7 +21,7 @@ Staple::~Staple()
 {
 }
 
-QDate Staple::expirationDate() const
+QDateTime Staple::expirationDate() const
 {
    return _expDate;
 }
