@@ -25,9 +25,9 @@ protected:
 };
 
 
-TEST_F(Staple_Test, getNumberOfDaysBeforeExpiration)
+TEST_F(Staple_Test, expirationDate)
 {
-   EXPECT_EQ("", stapleObj->numberOfDaysBeforeExpiration());
+   EXPECT_EQ("", stapleObj->expirationDate().toString());
 }
 
 TEST_F(Staple_Test, getStapleName)
@@ -48,9 +48,11 @@ TEST_F(Staple_Test, getStapleQuantity)
 
 TEST_F(Staple_Test, Staple)
 {
-    Staple st("Sept 23 2017", "TestSt", 0.67f, 2);
+    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
 
-    EXPECT_EQ("Sept 23 2017", st.numberOfDaysBeforeExpiration());
+    Staple st(date, "TestSt", 0.67f, 2);
+
+    EXPECT_EQ("2010-10-25T10:28:58.570Z", st.expirationDate().toString("yyyy-MM-ddTHH:mm:ss.zzzZ"));
     EXPECT_EQ("TestSt",       st.name());
     EXPECT_EQ(0.67f,          st.price());
     EXPECT_EQ(2,              st.quantity());
