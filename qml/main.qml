@@ -35,7 +35,7 @@ ApplicationWindow {
         anchors.top : header.bottom
         anchors.topMargin: 0
 
-        color: "white"
+        color: "#f5f5f5"
         clip: true
 
         Component {
@@ -49,15 +49,15 @@ ApplicationWindow {
                 border.width: 1
                 border.color: "lightgrey"
 
-                anchors.leftMargin  : 20
-                anchors.rightMargin : 20
+                anchors.leftMargin  : 16
+                anchors.rightMargin : 16
                 anchors.bottomMargin: 20
 
                 states: State {
                     name: "Details"
                     PropertyChanges { target: box;            height: boxHeight*2 }
                     PropertyChanges { target: stapleQuantity; visible: true }
-                    PropertyChanges { target: stapleImage;    visible: true }
+                    //PropertyChanges { target: stapleImage;    visible: true }
                 }
 
                 transitions: Transition {
@@ -109,11 +109,11 @@ ApplicationWindow {
                 Label {
                     id: stapleName
                     text: name
-                    color: "#212121"
+                    color: "#424242"
                     font.pointSize: 15
                     font.bold : true
                     anchors.left      : box.left
-                    anchors.leftMargin: 10
+                    anchors.leftMargin: 16
                     anchors.top       : box.top
                     anchors.topMargin : 5
                 }
@@ -124,7 +124,7 @@ ApplicationWindow {
                     text: qsTr("Product costs €") + Math.round(price * 100) / 100
                     color: "#424242"
                     anchors.left        : box.left
-                    anchors.leftMargin  : 10
+                    anchors.leftMargin  : 16
                     anchors.top         : stapleName.bottom
                     anchors.topMargin   : 5
                 }
@@ -141,7 +141,7 @@ ApplicationWindow {
                           qsTr("<br> according to Staples calculations.")
                     color: "#9e9e9e"
                     anchors.left        : box.left
-                    anchors.leftMargin  : 10
+                    anchors.leftMargin  : 16
                     anchors.top         : staplePrice.bottom
                     anchors.topMargin   : 5
                     anchors.bottomMargin: 5
@@ -151,24 +151,23 @@ ApplicationWindow {
                     id: stapleQuantity
 
                     Label {
-                        font.pointSize: 10
+                        font.pointSize: 15
                         text: quantity
                         color: "#ffffff"
                         anchors.centerIn: stapleQuantity
                     }
-
-                    height: stapleImage.height/2
-                    width: stapleImage.width/2
-                    color: quantity > 1 ? "#00c853" : "#dd2c00"
-                    radius: stapleImage.height/4
-
-                    anchors.right: stapleImage.left
+                    height: box.height/3
+                    width: box.height/3
+                    color: quantity > 0 ? "#00c853" : "grey"
+                    radius: box.height/32
+                    anchors.right: box.right
                     anchors.verticalCenter: box.verticalCenter
-                    anchors.rightMargin: -10
+                    anchors.rightMargin: 16
+                    anchors.bottomMargin: 16
                     z : 1
-                    anchors.bottomMargin: 10
                 }
 
+                /*
                 Image {
                     id: stapleImage
                     anchors.right: box.right
@@ -178,6 +177,7 @@ ApplicationWindow {
                     anchors.verticalCenter: box.verticalCenter
                     source: "qrc:/raw-food.svg"
                 }
+                */
             }
         }
 
