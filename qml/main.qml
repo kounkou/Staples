@@ -26,6 +26,44 @@ ApplicationWindow {
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
         }
+
+        TextField {
+            id : txtFld
+            width : header.width - 40
+            height: header.height/5
+            Material.elevation: 10
+            color: "#424242"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: header.top
+            anchors.topMargin: 10
+            smooth: true
+            placeholderText: "house-hold staple"
+            padding: search.width + 10
+            clip: true
+            font.pointSize: 15
+            font.bold: bold
+
+            background: Rectangle {
+                color: "#ffffff"
+                radius: 5
+                anchors.leftMargin: 5
+            }
+
+            Image {
+                id: search
+                anchors {
+                    top: txtFld.top;
+                    left: txtFld.left;
+                }
+                smooth: true
+                fillMode: Image.PreserveAspectFit
+                source: "qrc:/search.png"
+                height: txtFld.height - 25
+                width : txtFld.height - 25
+                anchors.verticalCenter: txtFld.verticalCenter
+                opacity: 0.5
+            }
+        }
     }
 
     Rectangle {
