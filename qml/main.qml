@@ -12,7 +12,7 @@ ApplicationWindow {
     title: qsTr("Staples")
 
     signal          refresh()
-    property real   boxHeight      : 180
+    property real   boxHeight : 180
 
     Rectangle {
         id : header
@@ -156,28 +156,16 @@ ApplicationWindow {
                         color: "#ffffff"
                         anchors.centerIn: stapleQuantity
                     }
-                    height: box.height/3
-                    width: box.height/3
+                    height: boxHeight/3
+                    width: boxHeight/3
                     color: quantity > 0 ? "#00c853" : "grey"
-                    radius: box.height/32
+                    radius: boxHeight/32
                     anchors.right: box.right
                     anchors.verticalCenter: box.verticalCenter
                     anchors.rightMargin: 16
                     anchors.bottomMargin: 16
                     z : 1
                 }
-
-                /*
-                Image {
-                    id: stapleImage
-                    anchors.right: box.right
-                    anchors.rightMargin: 10
-                    width: 75
-                    height: 75
-                    anchors.verticalCenter: box.verticalCenter
-                    source: "qrc:/raw-food.svg"
-                }
-                */
             }
         }
 
