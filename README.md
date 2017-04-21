@@ -7,7 +7,7 @@
 
 <p align="center">
   <img src="images/home.png" width="350"/>
-  <img src="images/main_screen.png" width="350"/>
+  <img src="https://cloud.githubusercontent.com/assets/2589171/25199740/2024d63a-254c-11e7-9f33-cfb72ad7cbe2.png" width="350"/>
 </p> 
 Gather all your house-hold staples on a single platform !
 
