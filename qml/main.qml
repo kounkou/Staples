@@ -11,7 +11,8 @@ ApplicationWindow {
     height:Screen.height
     title: qsTr("Staples")
 
-    property real boxHeight : 150
+    signal          refresh()
+    property real   boxHeight : 180
 
     Rectangle {
         id : header
@@ -25,6 +26,44 @@ ApplicationWindow {
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
         }
+
+        TextField {
+            id : txtFld
+            width : header.width - 40
+            height: header.height/5
+            Material.elevation: 10
+            color: "#424242"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: header.top
+            anchors.topMargin: 10
+            smooth: true
+            placeholderText: "house-hold staple"
+            padding: search.width + 10
+            clip: true
+            font.pointSize: 15
+            font.bold: bold
+
+            background: Rectangle {
+                color: "#ffffff"
+                radius: 5
+                anchors.leftMargin: 5
+            }
+
+            Image {
+                id: search
+                anchors {
+                    top: txtFld.top;
+                    left: txtFld.left;
+                }
+                smooth: true
+                fillMode: Image.PreserveAspectFit
+                source: "qrc:/search.png"
+                height: txtFld.height - 25
+                width : txtFld.height - 25
+                anchors.verticalCenter: txtFld.verticalCenter
+                opacity: 0.5
+            }
+        }
     }
 
     Rectangle {
@@ -34,7 +73,7 @@ ApplicationWindow {
         anchors.top : header.bottom
         anchors.topMargin: 0
 
-        color: "white"
+        color: "#f5f5f5"
         clip: true
 
         Component {
@@ -42,21 +81,21 @@ ApplicationWindow {
 
             Rectangle {
                 id: box
-                height:150
+                height:boxHeight
                 width: parent.width
                 color: "white"
                 border.width: 1
                 border.color: "lightgrey"
 
-                anchors.leftMargin  : 20
-                anchors.rightMargin : 20
+                anchors.leftMargin  : 16
+                anchors.rightMargin : 16
                 anchors.bottomMargin: 20
 
                 states: State {
                     name: "Details"
                     PropertyChanges { target: box;            height: boxHeight*2 }
                     PropertyChanges { target: stapleQuantity; visible: true }
-                    PropertyChanges { target: stapleImage;    visible: true }
+                    //PropertyChanges { target: stapleImage;    visible: true }
                 }
 
                 transitions: Transition {
@@ -75,7 +114,7 @@ ApplicationWindow {
 
                 ListView.onAdd: SequentialAnimation {
                     PropertyAction  { target:  box; property: "height"; value: 0 }
-                    NumberAnimation { target: box; property: "height"; to: 150; duration: 250; easing.type: Easing.InOutQuad }
+                    NumberAnimation { target: box; property: "height"; to: boxHeight; duration: 250; easing.type: Easing.InOutQuad }
                 }
                 ListView.onRemove: SequentialAnimation {
                     PropertyAction  { target: box;  property: "ListView.delayRemove"; value: true }
@@ -100,17 +139,19 @@ ApplicationWindow {
                     onClicked: {
                         if   (box.state == "") { box.state = "Details" }
                         else                   { box.state = "" }
+
+                        // console.log(expirationDate.toString())
                     }
                 }
 
                 Label {
                     id: stapleName
                     text: name
-                    color: "#212121"
+                    color: "#424242"
                     font.pointSize: 15
                     font.bold : true
                     anchors.left      : box.left
-                    anchors.leftMargin: 10
+                    anchors.leftMargin: 16
                     anchors.top       : box.top
                     anchors.topMargin : 5
                 }
@@ -121,20 +162,24 @@ ApplicationWindow {
                     text: qsTr("Product costs €") + Math.round(price * 100) / 100
                     color: "#424242"
                     anchors.left        : box.left
-                    anchors.leftMargin  : 10
+                    anchors.leftMargin  : 16
                     anchors.top         : stapleName.bottom
                     anchors.topMargin   : 5
                 }
 
                 Label {
                     id: stapleExpirationDate
+
+                    property date   expDate        : new Date(expirationDate)
+                    property string dateTimeString : expDate.toLocaleDateString()
+
                     font.pointSize: 13
                     wrapMode: Text.WordWrap
-                    text: qsTr("This product will expire on ") + numberOfDaysBeforeExpiration +
+                    text: qsTr("This product will expire on <br>") + Date.fromLocaleDateString(dateTimeString) +
                           qsTr("<br> according to Staples calculations.")
                     color: "#9e9e9e"
                     anchors.left        : box.left
-                    anchors.leftMargin  : 10
+                    anchors.leftMargin  : 16
                     anchors.top         : staplePrice.bottom
                     anchors.topMargin   : 5
                     anchors.bottomMargin: 5
@@ -144,32 +189,20 @@ ApplicationWindow {
                     id: stapleQuantity
 
                     Label {
-                        font.pointSize: 10
+                        font.pointSize: 15
                         text: quantity
                         color: "#ffffff"
                         anchors.centerIn: stapleQuantity
                     }
-
-                    height: stapleImage.height/2
-                    width: stapleImage.width/2
-                    color: quantity > 1 ? "#00c853" : "#dd2c00"
-                    radius: stapleImage.height/4
-
-                    anchors.right: stapleImage.left
-                    anchors.verticalCenter: box.verticalCenter
-                    anchors.rightMargin: -10
-                    z : 1
-                    anchors.bottomMargin: 10
-                }
-
-                Image {
-                    id: stapleImage
+                    height: boxHeight/3
+                    width: boxHeight/3
+                    color: quantity > 0 ? "#00c853" : "grey"
+                    radius: boxHeight/32
                     anchors.right: box.right
-                    anchors.rightMargin: 10
-                    width: 75
-                    height: 75
                     anchors.verticalCenter: box.verticalCenter
-                    source: "qrc:/raw-food.svg"
+                    anchors.rightMargin: 16
+                    anchors.bottomMargin: 16
+                    z : 1
                 }
             }
         }
@@ -181,6 +214,12 @@ ApplicationWindow {
             delegate: contactDelegate
             spacing: -1
             focus: true
+
+            // refresh the list of pull
+            onDragEnded: {
+                console.log("refreshing the list of staples...")
+                refresh()
+            }
         }
     }
 }

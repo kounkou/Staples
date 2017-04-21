@@ -20,7 +20,7 @@ class StaplesModel : public QAbstractListModel
    Q_OBJECT
 
 public slots:
-   void addStaple(std::string  expirationDate,
+   void addStaple(QDateTime    expirationDate,
                   std::string  name,
                   double       price,
                   unsigned int quantity);
@@ -33,12 +33,14 @@ public:
    void   clearListOfStaples();
    int    displayListOfStaples() const;
 
-   int      rowCount(const QModelIndex& parent = QModelIndex())        const;
-
-protected:
-   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+   int    rowCount(const QModelIndex& parent = QModelIndex()) const;
 
    QHash<int, QByteArray> roleNames() const;
+
+private:
+   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+
+   // QHash<int, QByteArray> roleNames() const;
    QHash<int, QByteArray> roleIds()   const;
 
 private:

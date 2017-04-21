@@ -2,8 +2,9 @@
     <qresource prefix="/">
         <file alias="main.qml">../qml/main.qml</file>
         <file alias="qtquickcontrols2.conf">../conf/qtquickcontrols2.conf</file>
-        <file alias="busy_dark.png">../rcs/busy_dark.png</file>
-        <file alias="raw-food.svg">../rcs/raw-food.svg</file>
-        <file alias="olive-oil.jpg">../rcs/olive-oil.jpg</file>
+        <file alias="busy_dark.png">busy_dark.png</file>
+        <file alias="raw-food.svg">raw-food.svg</file>
+        <file alias="olive-oil.jpg">olive-oil.jpg</file>
+        <file>search.png</file>
     </qresource>
 </RCC>

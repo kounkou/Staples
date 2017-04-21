@@ -49,6 +49,7 @@ private:
    StaplesModel*          _model;
    QQuickView*            _view;
    QTimer*                _timer;
+   QObject*               _item;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_

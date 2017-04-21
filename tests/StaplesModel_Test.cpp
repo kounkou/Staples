@@ -36,16 +36,18 @@ TEST_F(StaplesModel_Test, staplesContainerSize)
 
 TEST_F(StaplesModel_Test, addStaple)
 {
-    stapleObj->addStaple("Jan 01 2017", "Test Model", 0.78, 3);
-    stapleObj->addStaple("Jan 01 2017", "Test Model", 0.78, 3);
+    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
+    stapleObj->addStaple(date, "Test Model", 0.78, 3);
+    stapleObj->addStaple(date, "Test Model", 0.78, 3);
 
     EXPECT_EQ(2, stapleObj->staplesContainerSize());
 }
 
 TEST_F(StaplesModel_Test, clearListOfStaples)
 {
-    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
-    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
+    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
+    stapleObj->addStaple(date, "clearListOfStaples", 0.78, 3);
+    stapleObj->addStaple(date, "clearListOfStaples", 0.78, 3);
 
     EXPECT_EQ(2, stapleObj->staplesContainerSize());
     stapleObj->clearListOfStaples();
@@ -54,9 +56,21 @@ TEST_F(StaplesModel_Test, clearListOfStaples)
 
 TEST_F(StaplesModel_Test, displayListOfStaples)
 {
-    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
-    stapleObj->addStaple("Jan 01 2017", "clearListOfStaples", 0.78, 3);
+    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
+    stapleObj->addStaple(date, "clearListOfStaples", 0.78, 3);
+    stapleObj->addStaple(date, "clearListOfStaples", 0.78, 3);
     EXPECT_EQ(0, stapleObj->displayListOfStaples());
     stapleObj->clearListOfStaples();
     EXPECT_EQ(1, stapleObj->displayListOfStaples());
+}
+
+TEST_F(StaplesModel_Test, roleNames)
+{
+    QHash<int, QByteArray> roles;
+
+    roles = stapleObj->roleNames();
+    EXPECT_EQ(1, roles[Qt::UserRole + 1] == "expirationDate");
+    EXPECT_EQ(1, roles[Qt::UserRole + 2] == "name");
+    EXPECT_EQ(1, roles[Qt::UserRole + 3] == "price");
+    EXPECT_EQ(1, roles[Qt::UserRole + 4] == "quantity");
 }

@@ -11,6 +11,7 @@
 #define _STAPLE_H_
 
 #include <string>
+#include <QDateTime>
 
 class Staple 
 {
@@ -19,16 +20,16 @@ class Staple
 public:
             Staple();
    virtual ~Staple();
-            Staple(std::string _daysBeforeExpiration, std::string _stapleName, double _staplePrice, unsigned int _stapleQuantity);
+            Staple(QDateTime _expDate, std::string _stapleName, double _staplePrice, unsigned int _stapleQuantity);
 
-   std::string  numberOfDaysBeforeExpiration() const;
-   std::string  name() const;
-   double       price() const;
-   unsigned int quantity() const;
+   QDateTime    expirationDate() const;
+   std::string  name()           const;
+   double       price()          const;
+   unsigned int quantity()       const;
 
 /// protected members
 protected:
-   std::string  _daysBeforeExpiration;
+   QDateTime    _expDate;
    std::string  _stapleName;
    double       _staplePrice;
    unsigned int _stapleQuantity;
