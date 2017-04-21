@@ -35,10 +35,12 @@ public:
 
    int    rowCount(const QModelIndex& parent = QModelIndex()) const;
 
+   QHash<int, QByteArray> roleNames() const;
+
 private:
    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
-   QHash<int, QByteArray> roleNames() const;
+   // QHash<int, QByteArray> roleNames() const;
    QHash<int, QByteArray> roleIds()   const;
 
 private:
