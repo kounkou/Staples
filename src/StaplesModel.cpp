@@ -83,8 +83,8 @@ QHash<int, QByteArray> StaplesModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
 
-    roles[NameRole]           = "name";
     roles[ExpirationDateRole] = "expirationDate";
+    roles[NameRole]           = "name";
     roles[PriceRole]          = "price";
     roles[QuantityRole]       = "quantity";
 
