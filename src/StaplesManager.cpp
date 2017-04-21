@@ -42,9 +42,7 @@ int StaplesManager::retrieveStaples(const QJsonDocument& doc)
 
         foreach (const QJsonValue & v, agentsArray)
         {
-            qDebug() << v.toObject().value("name").toString();
-
-            _model->addStaple(v.toObject().value("exp").toString().toStdString(),
+            _model->addStaple(QDateTime::fromString(v.toObject().value("exp").toString(), "yyyy-MM-ddTHH:mm:ss.zzzZ").toLocalTime(),
                               v.toObject().value("name").toString().toStdString(),
                               v.toObject().value("price").toDouble(),
                               v.toObject().value("qty").toInt());

@@ -39,21 +39,21 @@ TEST_F(StaplesApplication_Test, retrieveListOfStaples)
 
 TEST_F(StaplesApplication_Test, addStapleToServer)
 {
-    Staple s("Apr 2 2017", "Test", 5.80, 2);
+    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
+    Staple s(date, "Test", 5.80, 2);
     stapleObj->init();
     EXPECT_EQ(0, stapleObj->addStapleToServer(s));
 }
 
 TEST_F(StaplesApplication_Test, removeStapleFromServer)
 {
-    Staple s("Apr 2 2017", "Test", 5.80, 2);
+    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
+    Staple s(date, "Test", 5.80, 2);
     stapleObj->init();
     EXPECT_EQ(0, stapleObj->removeStapleFromServer(s));
 }
 
-
 // Non Nominal cases
-
 TEST_F(StaplesApplication_Test, sendHttpRequest)
 {
     stapleObj->init();

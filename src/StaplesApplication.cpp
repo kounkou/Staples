@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QJsonArray>
 #include <QQmlContext>
+#include <QtQuick>
 
 StaplesApplication::StaplesApplication(QObject* parent)
     : QObject(parent)
@@ -24,6 +25,7 @@ void StaplesApplication::initUserInterface()
     _view = new QQuickView;
     _view->rootContext()->setContextProperty("stapleModel", _model);
     _view->setSource(QUrl("qrc:/main.qml"));
+    _item = _view->rootObject();
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
 }
 
@@ -102,13 +104,7 @@ int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
  */
 int StaplesApplication::addStapleToServer(const Staple& s) const
 {
-    QString str = QString("http://192.168.0.21/cgi-bin/example.cgi?")   +
-                  QString("val_x=")  + QString::fromStdString(s.numberOfDaysBeforeExpiration()) +
-                  QString("&val_y=") + QString::fromStdString(s.name()) +
-                  QString("&val_z=") + QString::number(s.price())       +
-                  QString("&val_t=") + QString::number(s.quantity())    +
-                  QString("&val_u=1");
-
+    QString str = "http://192.168.0.21:8080";
     qDebug() << str;
     return sendHttpRequest(QUrl(str));
 }
@@ -120,13 +116,7 @@ int StaplesApplication::addStapleToServer(const Staple& s) const
  */
 int StaplesApplication::removeStapleFromServer(const Staple& s) const
 {
-    QString str = QString("http://192.168.0.21/cgi-bin/example.cgi?")   +
-                  QString("val_x=")  + QString::fromStdString(s.numberOfDaysBeforeExpiration()) +
-                  QString("&val_y=") + QString::fromStdString(s.name()) +
-                  QString("&val_z=") + QString::number(s.price())       +
-                  QString("&val_t=") + QString::number(s.quantity())    +
-                  QString("&val_u=3");
-
+    QString str = "http://192.168.0.21:8080";
     qDebug() << str;
     return sendHttpRequest(QUrl(str));
 }
