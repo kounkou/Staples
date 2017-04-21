@@ -63,3 +63,14 @@ TEST_F(StaplesModel_Test, displayListOfStaples)
     stapleObj->clearListOfStaples();
     EXPECT_EQ(1, stapleObj->displayListOfStaples());
 }
+
+TEST_F(StaplesModel_Test, roleNames)
+{
+    QHash<int, QByteArray> roles;
+
+    roles = stapleObj->roleNames();
+    EXPECT_EQ(1, roles[Qt::UserRole + 1] == "expirationDate");
+    EXPECT_EQ(1, roles[Qt::UserRole + 2] == "name");
+    EXPECT_EQ(1, roles[Qt::UserRole + 3] == "price");
+    EXPECT_EQ(1, roles[Qt::UserRole + 4] == "quantity");
+}
