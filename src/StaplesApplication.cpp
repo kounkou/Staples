@@ -14,6 +14,7 @@ StaplesApplication::StaplesApplication(QObject* parent)
     , _staplesManager(NULL)
     , _model(NULL)
     , _view(NULL)
+    , _item(NULL)
 {
 }
 
@@ -22,11 +23,12 @@ void StaplesApplication::initUserInterface()
     _model = StaplesModel::getInstance();
 
     // setting-up the UI
-    _view = new QQuickView;
+    _view = new QQuickView();
     _view->rootContext()->setContextProperty("stapleModel", _model);
     _view->setSource(QUrl("qrc:/main.qml"));
     _item = _view->rootObject();
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
+    _view->show();
 }
 
 int StaplesApplication::init()
@@ -42,6 +44,7 @@ int StaplesApplication::init()
     {
        QObject::connect(_networkObj, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
        QObject::connect(_timer,      SIGNAL(timeout()),                this, SLOT(retrieveAllStaples()));
+       QObject::connect(_item,       SIGNAL(refresh()),                this, SLOT(retrieveAllStaples()));
        status = 0;
     }
     else
@@ -94,6 +97,7 @@ int StaplesApplication::sendHttpRequest(const QUrl& url) const
  */
 int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
 {
+    qDebug() << "called retrieveListOfStaples";
     return sendHttpRequest(url);
 }
 
