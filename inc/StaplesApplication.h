@@ -37,7 +37,7 @@ public:
 private:
    int  sendHttpRequest(const QUrl& url) const;
 
-private slots:
+public slots:
     int  onResult(QNetworkReply* rep);
     void retrieveAllStaples();
 
@@ -49,7 +49,7 @@ private:
    StaplesModel*          _model;
    QQuickView*            _view;
    QTimer*                _timer;
-   QObject*               _item;
+   QQuickItem*            _item;
 };
 
 #endif // end of _STAPLES_APPLICATION_H_

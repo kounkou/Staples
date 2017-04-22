@@ -4,15 +4,16 @@ import QtQuick 2.7
 import QtQuick.Window 2.0
 import QtQuick.Controls.Material 2.0
 
-ApplicationWindow {
+Rectangle {
     id: window
     visible: true
     width :Screen.width
     height:Screen.height
-    title: qsTr("Staples")
 
     signal          refresh()
+
     property real   boxHeight : 180
+    property bool   needFresh : false
 
     Rectangle {
         id : header
@@ -41,7 +42,7 @@ ApplicationWindow {
             padding: search.width + 10
             clip: true
             font.pointSize: 15
-            font.bold: bold
+            font.bold: false
 
             background: Rectangle {
                 color: "#ffffff"
@@ -216,9 +217,25 @@ ApplicationWindow {
             focus: true
 
             // refresh the list of pull
-            onDragEnded: {
-                console.log("refreshing the list of staples...")
-                refresh()
+            onContentYChanged:
+            {
+                console.log(contentY)
+
+                if (contentY < -100)
+                {
+                    // console.log(contentY)
+                    // console.log("staples will be refresh on release")
+                    needFresh = true
+                }
+            }
+
+            onDragEnded:
+            {
+                if (needFresh == true)
+                {
+                    needFresh = false
+                    // refresh()
+                }
             }
         }
     }
