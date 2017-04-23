@@ -6,5 +6,8 @@
         <file alias="raw-food.svg">raw-food.svg</file>
         <file alias="olive-oil.jpg">olive-oil.jpg</file>
         <file>search.png</file>
+        <file>deleteAll.png</file>
+        <file>deleteOne.png</file>
+        <file>add.png</file>
     </qresource>
 </RCC>
