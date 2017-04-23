@@ -43,8 +43,15 @@ int StaplesApplication::init()
     if (_networkObj != NULL && _staplesManager != NULL)
     {
        QObject::connect(_networkObj, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
-       QObject::connect(_timer,      SIGNAL(timeout()),                this, SLOT(retrieveAllStaples()));
-       QObject::connect(_item,       SIGNAL(refresh()),                this, SLOT(retrieveAllStaples()));
+       QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(onRetrieveAllStaples()));
+       QObject::connect(_item, SIGNAL(refresh()), this, SLOT(onRetrieveAllStaples()));
+       QObject::connect(_item, SIGNAL(authentificate(QString, QString)), this, SLOT(onAuthentificate(QString, QString)));
+       QObject::connect(_item, SIGNAL(addStaple(QString, QString, double, int)), this, SLOT(onAddStaple(QString, QString, double, int)));
+       QObject::connect(_item, SIGNAL(addOneStaple(QString)), this, SLOT(onAddOneStaple(QString)));
+       QObject::connect(_item, SIGNAL(removeOneStaple(QString)), this, SLOT(onRemoveOneStaple(QString)));
+       QObject::connect(_item, SIGNAL(removeStaple(QString)), this, SLOT(onRemoveStaple(QString)));
+       QObject::connect(_item, SIGNAL(searchStaple(QString)), this, SLOT(onSearchStaple(QString)));
+
        status = 0;
     }
     else
@@ -60,9 +67,50 @@ int StaplesApplication::init()
     return status;
 }
 
-void StaplesApplication::retrieveAllStaples()
+int StaplesApplication::onRetrieveAllStaples()
 {
-    retrieveListOfStaples(QUrl("http://192.168.0.21:8080"));
+    return retrieveListOfStaples(QUrl("http://192.168.0.21:8080"));
+}
+
+/*
+ * This method will add a staple on the server
+ */
+int StaplesApplication::onAddStaple(const QString& expirationDate, const QString& name, double price, int qty)
+{
+    return sendHttpRequest(QUrl("http://192.168.0.21:8080"));
+}
+
+/*
+ * This is method will remove a staple on the server
+ */
+int StaplesApplication::onRemoveStaple(const QString& name)
+{
+    return sendHttpRequest(QUrl("http://192.168.0.21:8080"));
+}
+
+/*
+ * This method will be used to authentificate on
+ * the server. The outcome will be managed by
+ * the server
+ */
+int StaplesApplication::onAuthentificate(const QString& username, const QString& password)
+{
+    return sendHttpRequest(QUrl("http://192.168.0.21:8080"));
+}
+
+int StaplesApplication::onAddOneStaple(const QString& name)
+{
+    return sendHttpRequest(QUrl("http://192.168.0.21:8080"));
+}
+
+int StaplesApplication::onRemoveOneStaple(const QString& name)
+{
+    return sendHttpRequest(QUrl("http://192.168.0.21:8080"));
+}
+
+int StaplesApplication::onSearchStaple(const QString& name)
+{
+    return sendHttpRequest(QUrl("http://192.168.0.21:8080"));
 }
 
 /*
@@ -99,30 +147,6 @@ int StaplesApplication::retrieveListOfStaples(const QUrl& url) const
 {
     qDebug() << "called retrieveListOfStaples";
     return sendHttpRequest(url);
-}
-
-/*
- * This function will add staple to the
- * remote server with the provided
- * staple in parameter
- */
-int StaplesApplication::addStapleToServer(const Staple& s) const
-{
-    QString str = "http://192.168.0.21:8080";
-    qDebug() << str;
-    return sendHttpRequest(QUrl(str));
-}
-
-/*
- * This function will remove a staple from the
- * remote server with the provided
- * staple in parameter
- */
-int StaplesApplication::removeStapleFromServer(const Staple& s) const
-{
-    QString str = "http://192.168.0.21:8080";
-    qDebug() << str;
-    return sendHttpRequest(QUrl(str));
 }
 
 /*
