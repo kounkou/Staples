@@ -105,6 +105,7 @@ Rectangle {
                     text: name
                     color: "#424242"
                     font.pointSize: 15
+                    font.family: "Helvetica"
                     font.bold : true
                     anchors.left      : box.left
                     anchors.leftMargin: 16
@@ -115,6 +116,7 @@ Rectangle {
                 Label {
                     id: staplePrice
                     font.pointSize: 13
+                    font.family: "Helvetica"
                     text: qsTr("Product costs €") + Math.round(price * 100) / 100
                     color: "#424242"
                     anchors.left        : box.left
@@ -130,6 +132,7 @@ Rectangle {
                     property string dateTimeString : expDate.toLocaleDateString()
 
                     font.pointSize: 13
+                    font.family: "Helvetica"
                     wrapMode: Text.WordWrap
                     text: qsTr("This product will expire on <br>") + Date.fromLocaleDateString(dateTimeString) +
                           qsTr("<br> according to Staples calculations.")
@@ -304,9 +307,11 @@ Rectangle {
             clip: true
             font.pointSize: 15
             font.bold: false
+            font.family: "Helvetica"
+
             onEditingFinished: {
-                txtFld.text = ""
                 searchStaple(txtFld.text)
+                // txtFld.text = ""
             }
 
             background: Rectangle {
