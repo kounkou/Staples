@@ -1,5 +1,6 @@
 # Staples
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f6400517d1e6471f9c5d39d8abc844f2)](https://www.codacy.com/app/kounkou/Staples?utm_source=github.com&utm_medium=referral&utm_content=kounkou/Staples&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/kounkou/Staples.svg?branch=master)](https://travis-ci.org/kounkou/Staples)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f6400517d1e6471f9c5d39d8abc844f2)](https://www.codacy.com/app/kounkou/Staples?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kounkou/Staples&amp;utm_campaign=Badge_Grade)
 [![codecov.io](https://codecov.io/github/kounkou/Staples/coverage.svg?branch=master)](https://codecov.io/github/kounkou/Staples?branch=master)
