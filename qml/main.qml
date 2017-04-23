@@ -10,70 +10,22 @@ Rectangle {
     width :Screen.width
     height:Screen.height
 
-    signal          refresh()
+    signal refresh()
+    signal searchStaple(string name)
+    signal authentificate(string username, string password)
+    signal addStaple(string expirationDate, string name, double price, int qty)
+    signal addOneStaple(string name)
+    signal removeOneStaple(string name)
+    signal removeStaple(string name)
 
-    property real   boxHeight : 180
-    property bool   needFresh : false
-
-    Rectangle {
-        id : header
-        width: parent.width
-        height: Screen.height/3
-        Material.elevation: 10
-
-        Image {
-            id: staplesImage
-            source: "qrc:/olive-oil.jpg"
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectCrop
-        }
-
-        TextField {
-            id : txtFld
-            width : header.width - 40
-            height: header.height/5
-            Material.elevation: 10
-            color: "#424242"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: header.top
-            anchors.topMargin: 10
-            smooth: true
-            placeholderText: "house-hold staple"
-            padding: search.width + 10
-            clip: true
-            font.pointSize: 15
-            font.bold: false
-
-            background: Rectangle {
-                color: "#ffffff"
-                radius: 5
-                anchors.leftMargin: 5
-            }
-
-            Image {
-                id: search
-                anchors {
-                    top: txtFld.top;
-                    left: txtFld.left;
-                }
-                smooth: true
-                fillMode: Image.PreserveAspectFit
-                source: "qrc:/search.png"
-                height: txtFld.height - 25
-                width : txtFld.height - 25
-                anchors.verticalCenter: txtFld.verticalCenter
-                opacity: 0.5
-            }
-        }
-    }
+    property real boxHeight : 180
+    property bool needFresh : false
 
     Rectangle {
         width : window.width
         height: window.height - header.height
-
         anchors.top : header.bottom
         anchors.topMargin: 0
-
         color: "#f5f5f5"
         clip: true
 
@@ -87,7 +39,6 @@ Rectangle {
                 color: "white"
                 border.width: 1
                 border.color: "lightgrey"
-
                 anchors.leftMargin  : 16
                 anchors.rightMargin : 16
                 anchors.bottomMargin: 20
@@ -96,7 +47,9 @@ Rectangle {
                     name: "Details"
                     PropertyChanges { target: box;            height: boxHeight*2 }
                     PropertyChanges { target: stapleQuantity; visible: true }
-                    //PropertyChanges { target: stapleImage;    visible: true }
+                    PropertyChanges { target: removerAll;     visible: true }
+                    PropertyChanges { target: removerOne;     visible: true }
+                    PropertyChanges { target: adderOne;       visible: true }
                 }
 
                 transitions: Transition {
@@ -113,9 +66,10 @@ Rectangle {
                     }
                 }
 
+                /*
                 ListView.onAdd: SequentialAnimation {
-                    PropertyAction  { target:  box; property: "height"; value: 0 }
-                    NumberAnimation { target: box; property: "height"; to: boxHeight; duration: 250; easing.type: Easing.InOutQuad }
+                    PropertyAction  { target: box; property: "height";  value: 0 }
+                    NumberAnimation { target: box; property: "height";  to: boxHeight; duration: 250; easing.type: Easing.InOutQuad }
                 }
                 ListView.onRemove: SequentialAnimation {
                     PropertyAction  { target: box;  property: "ListView.delayRemove"; value: true }
@@ -124,6 +78,7 @@ Rectangle {
                     // Make sure delayRemove is set back to false so that the item can be destroyed
                     PropertyAction { target: box; property: "ListView.delayRemove"; value: false }
                 }
+                */
 
                 Behavior on height
                 {
@@ -203,7 +158,87 @@ Rectangle {
                     anchors.verticalCenter: box.verticalCenter
                     anchors.rightMargin: 16
                     anchors.bottomMargin: 16
-                    z : 1
+                }
+
+                Image {
+                    id : adderOne
+                    anchors.horizontalCenter: box.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    source: "qrc:/add.png"
+                    height: boxHeight/2.5
+                    width: boxHeight/2.5
+                    visible: false
+                    opacity: 0.5
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                           addOneStaple(name)
+                        }
+                        onPressed:  { adderOne.state = "PRESSED" }
+                        onReleased: { adderOne.state = "RELEASED" }
+                    }
+
+                    states: [
+                        State { name: "PRESSED"; PropertyChanges  { target: adderOne; opacity: 1.0}},
+                        State { name: "RELEASED"; PropertyChanges { target: adderOne; opacity: 0.5}}
+                    ]
+                }
+
+                Image {
+                    id : removerOne
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    anchors.right: adderOne.left
+                    anchors.rightMargin: 40
+                    source: "qrc:/deleteOne.png"
+                    height: boxHeight/2.5
+                    width: boxHeight/2.5
+                    visible: false
+                    opacity: 0.5
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                           removeOneStaple(name)
+                        }
+                        onPressed:  { removerOne.state = "PRESSED" }
+                        onReleased: { removerOne.state = "RELEASED" }
+                    }
+
+                    states: [
+                        State { name: "PRESSED"; PropertyChanges  { target: removerOne; opacity: 1.0}},
+                        State { name: "RELEASED"; PropertyChanges { target: removerOne; opacity: 0.5}}
+                    ]
+                }
+
+                Image {
+                    id : removerAll
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    anchors.left: adderOne.right
+                    anchors.leftMargin: 40
+                    source: "qrc:/deleteAll.png"
+                    height: boxHeight/2.5
+                    width: boxHeight/2.5
+                    visible: false
+                    opacity: 0.5
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                           removeStaple(name)
+                        }
+
+                        onPressed:  { removerAll.state = "PRESSED" }
+                        onReleased: { removerAll.state = "RELEASED" }
+                    }
+
+                    states: [
+                        State { name: "PRESSED"; PropertyChanges  { target: removerAll; opacity: 1.0}},
+                        State { name: "RELEASED"; PropertyChanges { target: removerAll; opacity: 0.5}}
+                    ]
                 }
             }
         }
@@ -219,7 +254,7 @@ Rectangle {
             // refresh the list of pull
             onContentYChanged:
             {
-                console.log(contentY)
+                // console.log(contentY)
 
                 if (contentY < -100)
                 {
@@ -236,6 +271,63 @@ Rectangle {
                     needFresh = false
                     // refresh()
                 }
+            }
+        }
+    }
+
+    Rectangle {
+        id : header
+        width: parent.width
+        height: Screen.height/3
+        Material.elevation: 0
+        z : 1
+
+        Image {
+            id: staplesImage
+            source: "qrc:/olive-oil.jpg"
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectCrop
+        }
+
+        TextField {
+            id : txtFld
+            width : header.width - 40
+            height: header.height/5
+            Material.elevation: 10
+            color: "#424242"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: header.top
+            anchors.topMargin: 10
+            smooth: true
+            placeholderText: "house-hold staple"
+            padding: search.width + 10
+            clip: true
+            font.pointSize: 15
+            font.bold: false
+            onEditingFinished: {
+                txtFld.text = ""
+                searchStaple(txtFld.text)
+            }
+
+            background: Rectangle {
+                color: "#ffffff"
+                radius: 5
+                anchors.leftMargin: 5
+            }
+
+            Image {
+                id: search
+                anchors {
+                    top: txtFld.top;
+                    left: txtFld.left;
+                }
+                smooth: true
+                fillMode: Image.PreserveAspectFit
+                source: "qrc:/search.png"
+                height: txtFld.height - 25
+                width : txtFld.height - 25
+                anchors.verticalCenter: txtFld.verticalCenter
+                opacity: 0.5
             }
         }
     }
