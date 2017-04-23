@@ -69,7 +69,7 @@ int StaplesApplication::init()
 
 int StaplesApplication::onRetrieveAllStaples()
 {
-    return retrieveListOfStaples(QUrl("http://192.168.0.21:8080"));
+    return retrieveListOfStaples(QUrl("http://192.168.0.21:8080/?req=SELECT * FROM staples_root"));
 }
 
 /*
@@ -110,7 +110,18 @@ int StaplesApplication::onRemoveOneStaple(const QString& name)
 
 int StaplesApplication::onSearchStaple(const QString& name)
 {
-    return sendHttpRequest(QUrl("http://192.168.0.21:8080"));
+    QString url;
+
+    if (!name.isEmpty())
+    {
+        url = "http://192.168.0.21:8080/?req=SELECT * FROM staples_root WHERE name LIKE '" + name + "'";
+    }
+    else
+    {
+        onRetrieveAllStaples();
+    }
+
+    return sendHttpRequest(QUrl(url));
 }
 
 /*
