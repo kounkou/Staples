@@ -6,8 +6,8 @@
 [![Issue Count](https://codeclimate.com/github/kounkou/Staples/badges/issue_count.svg)](https://codeclimate.com/github/kounkou/Staples)
 
 <p align="center">
-  <img src="images/home.png" width="200"/>
-  <img src="images/main_screen.png" width="200"/>
+  <img src="images/home.png" width="350"/>
+  <img src="images/main_screen.png" width="350"/>
 </p> 
 Gather all your house-hold staples on a single platform !
 
