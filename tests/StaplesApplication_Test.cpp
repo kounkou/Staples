@@ -74,7 +74,7 @@ TEST_F(StaplesApplication_Test, onSearchStaple)
     EXPECT_EQ(0, stapleObj->onSearchStaple(""));
 }
 
-// Non Nominal cases
+// Non Nominal case
 TEST_F(StaplesApplication_Test, sendHttpRequest)
 {
     stapleObj->init();
