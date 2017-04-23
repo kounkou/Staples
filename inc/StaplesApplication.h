@@ -30,16 +30,20 @@ public:
 
    int  init();
    int  retrieveListOfStaples(const QUrl& url)  const;
-   int  addStapleToServer(const Staple& s)      const;
-   int  removeStapleFromServer(const Staple& s) const;
    void initUserInterface();
 
 private:
    int  sendHttpRequest(const QUrl& url) const;
 
 public slots:
-    int  onResult(QNetworkReply* rep);
-    void retrieveAllStaples();
+    int onResult(QNetworkReply* rep);
+    int onRetrieveAllStaples();
+    int onAddStaple(const QString& expirationDate, const QString& name, double price, int qty);
+    int onRemoveStaple(const QString& name);
+    int onAuthentificate(const QString& username, const QString& password);
+    int onAddOneStaple(const QString& name);
+    int onRemoveOneStaple(const QString& name);
+    int onSearchStaple(const QString& name);
 
 /// protected members
 private:
