@@ -47,7 +47,6 @@ DISTFILES += \
     rcs/main.qml \
     qml/Characteristics.qml \
     qml/Dialog.qml \
-    qml/Header.qml \
     qml/Label.qml \
     qml/main.qml \
     qml/Menu.qml \

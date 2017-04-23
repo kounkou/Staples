@@ -39,18 +39,38 @@ TEST_F(StaplesApplication_Test, retrieveListOfStaples)
 
 TEST_F(StaplesApplication_Test, addStapleToServer)
 {
-    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
-    Staple s(date, "Test", 5.80, 2);
     stapleObj->init();
-    EXPECT_EQ(0, stapleObj->addStapleToServer(s));
+    EXPECT_EQ(0, stapleObj->onAddStaple("2010-10-25T10:28:58.570Z", "Test", 5.80, 2));
 }
 
 TEST_F(StaplesApplication_Test, removeStapleFromServer)
 {
-    QDateTime date = QDateTime::fromString("2010-10-25T10:28:58.570Z", "yyyy-MM-ddTHH:mm:ss.zzzZ");
-    Staple s(date, "Test", 5.80, 2);
     stapleObj->init();
-    EXPECT_EQ(0, stapleObj->removeStapleFromServer(s));
+    EXPECT_EQ(0, stapleObj->onRemoveStaple("Test"));
+}
+
+TEST_F(StaplesApplication_Test, authentificate)
+{
+    stapleObj->init();
+    EXPECT_EQ(0, stapleObj->onAuthentificate("Test", "Test"));
+}
+
+TEST_F(StaplesApplication_Test, addOneStaple)
+{
+    stapleObj->init();
+    EXPECT_EQ(0, stapleObj->onAddOneStaple("Test"));
+}
+
+TEST_F(StaplesApplication_Test, removeOneStaple)
+{
+    stapleObj->init();
+    EXPECT_EQ(0, stapleObj->onRemoveOneStaple("Test"));
+}
+
+TEST_F(StaplesApplication_Test, onSearchStaple)
+{
+    stapleObj->init();
+    EXPECT_EQ(0, stapleObj->onSearchStaple("Test"));
 }
 
 // Non Nominal cases
