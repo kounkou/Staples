@@ -118,7 +118,7 @@ int StaplesApplication::onSearchStaple(const QString& name)
     }
     else
     {
-        onRetrieveAllStaples();
+        return onRetrieveAllStaples();
     }
 
     return sendHttpRequest(QUrl(url));
