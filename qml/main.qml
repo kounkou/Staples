@@ -10,6 +10,11 @@ Rectangle {
     width :Screen.width
     height:Screen.height
 
+    FontLoader {
+        id: fixedFont
+        source : Qt.resolvedUrl("qrc:/Roboto/Roboto-Thin.ttf");
+    }
+
     signal refresh()
     signal searchStaple(string name)
     signal authentificate(string username, string password)
@@ -18,10 +23,115 @@ Rectangle {
     signal removeOneStaple(string name)
     signal removeStaple(string name)
 
-    property real boxHeight : 180
+    property real boxHeight : 205
     property bool needFresh : false
 
+    Rectangle
+    {
+        id    : test
+        height: 100
+        width : 100
+        color : "red"
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                stackView.pop()
+            }
+        }
+
+        /*
+        Image {
+            id : adderOne
+            anchors.horizontalCenter: box.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            source: "qrc:/add.png"
+            height: boxHeight/2.5
+            width: boxHeight/2.5
+            visible: false
+            opacity: 0.5
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                   addOneStaple(name)
+                   stackView.push(test)
+                }
+                onPressed:  { adderOne.state = "PRESSED" }
+                onReleased: { adderOne.state = "RELEASED" }
+            }
+
+            states: [
+                State { name: "PRESSED"; PropertyChanges  { target: adderOne; opacity: 1.0}},
+                State { name: "RELEASED"; PropertyChanges { target: adderOne; opacity: 0.5}}
+            ]
+        }
+
+        Image {
+            id : removerOne
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            anchors.right: adderOne.left
+            anchors.rightMargin: 40
+            source: "qrc:/deleteOne.png"
+            height: boxHeight/2.5
+            width: boxHeight/2.5
+            visible: false
+            opacity: 0.5
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                   removeOneStaple(name)
+                }
+                onPressed:  { removerOne.state = "PRESSED" }
+                onReleased: { removerOne.state = "RELEASED" }
+            }
+
+            states: [
+                State { name: "PRESSED"; PropertyChanges  { target: removerOne; opacity: 1.0}},
+                State { name: "RELEASED"; PropertyChanges { target: removerOne; opacity: 0.5}}
+            ]
+        }
+
+        Image {
+            id : removerAll
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            anchors.left: adderOne.right
+            anchors.leftMargin: 40
+            source: "qrc:/deleteAll.png"
+            height: boxHeight/2.5
+            width: boxHeight/2.5
+            visible: false
+            opacity: 0.5
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                   removeStaple(name)
+                }
+
+                onPressed:  { removerAll.state = "PRESSED" }
+                onReleased: { removerAll.state = "RELEASED" }
+            }
+
+            states: [
+                State { name: "PRESSED"; PropertyChanges  { target: removerAll; opacity: 1.0}},
+                State { name: "RELEASED"; PropertyChanges { target: removerAll; opacity: 0.5}}
+            ]
+        }
+        */
+    }
+
+    StackView {
+
+        id: stackView
+        initialItem: windowRec
+
     Rectangle {
+        id : windowRec
         width : window.width
         height: window.height
         anchors.topMargin: 0
@@ -44,7 +154,7 @@ Rectangle {
 
                 states: State {
                     name: "Details"
-                    PropertyChanges { target: box;            height: boxHeight*2 }
+                    PropertyChanges { target: box;            height: boxHeight }
                     PropertyChanges { target: stapleQuantity; visible: true }
                     PropertyChanges { target: removerAll;     visible: true }
                     PropertyChanges { target: removerOne;     visible: true }
@@ -65,20 +175,6 @@ Rectangle {
                     }
                 }
 
-                /*
-                ListView.onAdd: SequentialAnimation {
-                    PropertyAction  { target: box; property: "height";  value: 0 }
-                    NumberAnimation { target: box; property: "height";  to: boxHeight; duration: 250; easing.type: Easing.InOutQuad }
-                }
-                ListView.onRemove: SequentialAnimation {
-                    PropertyAction  { target: box;  property: "ListView.delayRemove"; value: true }
-                    NumberAnimation { target: box; property: "height"; to: 0; duration: 250; easing.type: Easing.InOutQuad }
-
-                    // Make sure delayRemove is set back to false so that the item can be destroyed
-                    PropertyAction { target: box; property: "ListView.delayRemove"; value: false }
-                }
-                */
-
                 Behavior on height
                 {
                     NumberAnimation
@@ -92,36 +188,34 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if   (box.state == "") { box.state = "Details" }
-                        else                   { box.state = "" }
-
-                        // console.log(expirationDate.toString())
+                        stackView.push(test)
                     }
                 }
 
                 Label {
                     id: stapleName
                     text: name
-                    color: "#424242"
+                    color: "#212121"
                     font.pointSize: 15
-                    font.family: "Helvetica"
+                    font.family: fixedFont.name
                     font.bold : true
-                    anchors.left      : box.left
+                    anchors.left      : stapleQuantity.right
                     anchors.leftMargin: 16
                     anchors.top       : box.top
-                    anchors.topMargin : 5
+                    anchors.topMargin : 16
                 }
 
                 Label {
                     id: staplePrice
                     font.pointSize: 13
-                    font.family: "Helvetica"
+                    font.family: fixedFont.name
+                    font.bold : true
                     text: qsTr("Product costs €") + Math.round(price * 100) / 100
                     color: "#424242"
-                    anchors.left        : box.left
+                    anchors.left        : stapleQuantity.right
                     anchors.leftMargin  : 16
                     anchors.top         : stapleName.bottom
-                    anchors.topMargin   : 5
+                    anchors.topMargin   : 8
                 }
 
                 Label {
@@ -131,16 +225,16 @@ Rectangle {
                     property string dateTimeString : expDate.toLocaleDateString()
 
                     font.pointSize: 13
-                    font.family: "Helvetica"
+                    font.family: fixedFont.name
                     wrapMode: Text.WordWrap
                     text: qsTr("This product will expire on <br>") + Date.fromLocaleDateString(dateTimeString) +
                           qsTr("<br> according to Staples calculations.")
-                    color: "#9e9e9e"
-                    anchors.left        : box.left
+                    color: "#424242"
+                    anchors.left        : stapleQuantity.right
                     anchors.leftMargin  : 16
                     anchors.top         : staplePrice.bottom
-                    anchors.topMargin   : 5
-                    anchors.bottomMargin: 5
+                    anchors.topMargin   : 8
+                    anchors.bottomMargin: 8
                 }
 
                 Rectangle {
@@ -152,95 +246,16 @@ Rectangle {
                         color: "#ffffff"
                         anchors.centerIn: stapleQuantity
                     }
-                    height: boxHeight/3
-                    width: boxHeight/3
+                    height: boxHeight/4
+                    width: boxHeight/4
                     color: quantity > 0 ? "#00c853" : "grey"
                     radius: boxHeight/32
-                    anchors.right: box.right
-                    anchors.verticalCenter: box.verticalCenter
-                    anchors.rightMargin: 16
+
+                    anchors.left: box.left
+                    anchors.top: box.top
+                    anchors.topMargin: 16
+                    anchors.leftMargin: 16
                     anchors.bottomMargin: 16
-                }
-
-                Image {
-                    id : adderOne
-                    anchors.horizontalCenter: box.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 5
-                    source: "qrc:/add.png"
-                    height: boxHeight/2.5
-                    width: boxHeight/2.5
-                    visible: false
-                    opacity: 0.5
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                           addOneStaple(name)
-                        }
-                        onPressed:  { adderOne.state = "PRESSED" }
-                        onReleased: { adderOne.state = "RELEASED" }
-                    }
-
-                    states: [
-                        State { name: "PRESSED"; PropertyChanges  { target: adderOne; opacity: 1.0}},
-                        State { name: "RELEASED"; PropertyChanges { target: adderOne; opacity: 0.5}}
-                    ]
-                }
-
-                Image {
-                    id : removerOne
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 5
-                    anchors.right: adderOne.left
-                    anchors.rightMargin: 40
-                    source: "qrc:/deleteOne.png"
-                    height: boxHeight/2.5
-                    width: boxHeight/2.5
-                    visible: false
-                    opacity: 0.5
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                           removeOneStaple(name)
-                        }
-                        onPressed:  { removerOne.state = "PRESSED" }
-                        onReleased: { removerOne.state = "RELEASED" }
-                    }
-
-                    states: [
-                        State { name: "PRESSED"; PropertyChanges  { target: removerOne; opacity: 1.0}},
-                        State { name: "RELEASED"; PropertyChanges { target: removerOne; opacity: 0.5}}
-                    ]
-                }
-
-                Image {
-                    id : removerAll
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 5
-                    anchors.left: adderOne.right
-                    anchors.leftMargin: 40
-                    source: "qrc:/deleteAll.png"
-                    height: boxHeight/2.5
-                    width: boxHeight/2.5
-                    visible: false
-                    opacity: 0.5
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                           removeStaple(name)
-                        }
-
-                        onPressed:  { removerAll.state = "PRESSED" }
-                        onReleased: { removerAll.state = "RELEASED" }
-                    }
-
-                    states: [
-                        State { name: "PRESSED"; PropertyChanges  { target: removerAll; opacity: 1.0}},
-                        State { name: "RELEASED"; PropertyChanges { target: removerAll; opacity: 0.5}}
-                    ]
                 }
             }
         }
@@ -284,7 +299,7 @@ Rectangle {
                     clip: true
                     font.pointSize: 15
                     font.bold: false
-                    font.family: "Helvetica"
+                    font.family: fixedFont.name
 
                     onEditingFinished: {
                         searchStaple(txtFld.text)
@@ -294,7 +309,7 @@ Rectangle {
                     background: Rectangle {
                         color: "#ffffff"
                         radius: 5
-                        anchors.leftMargin: 5
+                        anchors.leftMargin: 8
                     }
 
                     Image {
@@ -337,4 +352,6 @@ Rectangle {
             }
         }
     }
+    }
 }
+
