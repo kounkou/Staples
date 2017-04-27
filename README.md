@@ -43,7 +43,7 @@ Staples application can be tested on your personal server for Staples
 
 `# bash weberser.sh`
 
-4. Enjoy !
+4. please Enjoy !
 
 # Contact
 
